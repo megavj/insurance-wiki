@@ -973,6 +973,8 @@ function render(){
   observers.forEach(function(o){o.disconnect();});observers=[];
   hideTip();
   var h=(location.hash||'#home').slice(1)||'home', navKey='home';
+  try{h=decodeURIComponent(h);}catch(e){}
+  if(h.indexOf('~')>0){var _p=h.split('~');h=_p[0];if(!pendingTarget)pendingTarget=_p[1];}
   if(h==='home'){app.innerHTML=viewHome();wireHome();}
   else if(h==='sales'){app.innerHTML=viewSales();wireSales();navKey='sales';}
   else if(h==='glossary'){app.innerHTML=viewGlossary();wireGloss();navKey='glossary';}
