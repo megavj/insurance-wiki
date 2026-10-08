@@ -2,23 +2,1129 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>홈 - 보험위키</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>프라임 보험위키</title>
+<meta name="description" content="보험카테고리 v3.0 지식지도 — 보험설계사가 알아야 할 상품·제도·영업 지식을 한 장의 인터랙티브 지도로 연결한 프라임에셋 프리미엄사업부 보험위키">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800;900&family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 글래스 필 내비 고정 · 홈 = 좌 카피 / 우 3D 지식구체 + 떠있는 유리 카드 → 통계 스트립 → 벤토 챕터 → 세일즈 궤도 → 라운지 → CTA · 문서 = 유리 사이드트리 · 본문 · 목차 · 세일즈 = 고정 레일 + 유리 패널 8장 */
+:root{
+  --bg:#F5F7FB; --bg-2:#FFFFFF; --bg-3:#EDF1F8;
+  --fg:#101A33; --fg-2:#3E4A66; --mute:#5E6984; --faint:#A2ABC0;
+  --line:rgba(16,26,51,.09); --line-2:rgba(16,26,51,.17);
+  --glass:rgba(255,255,255,.78); --glass-2:rgba(255,255,255,.95); --glass-solid:rgba(255,255,255,.97);
+  --blue:#2F5BEA; --cyan:#0A7396; --violet:#6B4EE6; --cyan-ink:#FFFFFF;
+  --grad:linear-gradient(135deg,#3A66F0,#6E52EA);
+  --grad-text:linear-gradient(95deg,#2F5BEA,#0B8FB8 50%,#6B4EE6);
+  --warn:#A35F00; --warn-line:rgba(163,95,0,.35);
+  --shadow:0 1px 2px rgba(16,26,51,.04),0 14px 34px -22px rgba(16,26,51,.22);
+  --fd:"Gothic A1","IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --fb:"IBM Plex Sans KR","Gothic A1","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --fm:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  --maxw:1320px; --gut:20px; --r:22px; --r-s:14px;
+  color-scheme:light;
+}
+html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--fb);font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word;overflow-x:hidden}
+a{color:inherit}
+[hidden]{display:none!important}
+[id]{scroll-margin-top:100px}
+::selection{background:var(--cyan);color:var(--cyan-ink)}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+h1,h2,h3,h4{font-family:var(--fd);font-weight:800;letter-spacing:-.03em;text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.mono{font-family:var(--fm)}
+.pill{display:inline-flex;align-items:center;gap:9px;font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(11,126,163,.32);background:rgba(11,126,163,.06);padding:6px 13px;border-radius:999px;white-space:nowrap}
+.pill i{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);flex-shrink:0}
+.gt{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+.glass{background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:var(--shadow)}
+
+/* ambient */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.aurora i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;animation:drift 20s ease-in-out infinite alternate;will-change:transform}
+.aurora .b1{width:720px;height:720px;left:-200px;top:-240px;background:radial-gradient(circle,#CFDBFF,transparent 65%)}
+.aurora .b2{width:620px;height:620px;right:-160px;top:100px;background:radial-gradient(circle,#C6EEF7,transparent 65%);animation-delay:-7s}
+.aurora .b3{width:560px;height:560px;left:38%;bottom:-280px;background:radial-gradient(circle,#E0D8FF,transparent 65%);animation-delay:-12s}
+@keyframes drift{to{transform:translate(70px,40px) scale(1.12)}}
+.noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.6'/></svg>")}
+main,footer,.topbar{position:relative;z-index:1}
+
+/* top bar */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(255,255,255,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut);min-height:72px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;flex-shrink:0}
+.brand-mark{font-family:var(--fd);font-weight:900;font-size:18px;letter-spacing:.03em}
+.brand-mark b{color:var(--cyan);font-weight:900}
+.brand-sub{font-family:var(--fm);font-size:10px;letter-spacing:.16em;color:var(--mute);text-transform:uppercase}
+.nav{display:flex;gap:2px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--glass);margin-inline:auto}
+.nav a{text-decoration:none;color:var(--fg-2);font-size:13.5px;font-weight:500;padding:7px 15px;border-radius:999px;white-space:nowrap;transition:color .2s,background .2s}
+.nav a:hover{color:var(--fg)}
+.nav a.on{background:rgba(47,91,234,.10);color:var(--blue);font-weight:600}
+.actions{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.kbtn{display:flex;align-items:center;gap:10px;background:var(--glass);border:1px solid var(--line);color:var(--fg-2);font:inherit;font-size:13.5px;padding:8px 11px 8px 13px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s}
+.kbtn:hover{border-color:var(--line-2);color:var(--fg)}
+.kbd{font-family:var(--fm);font-size:10.5px;border:1px solid var(--line-2);border-radius:6px;padding:1px 6px;color:var(--mute)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-family:var(--fd);font-size:14px;font-weight:700;padding:10px 20px;border-radius:999px;border:1px solid transparent;background:var(--grad);color:#fff;cursor:pointer;text-decoration:none;white-space:nowrap;box-shadow:0 10px 24px -12px rgba(47,91,234,.55);transition:transform .2s,box-shadow .2s,filter .2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 14px 28px -12px rgba(47,91,234,.65);filter:brightness(1.08)}
+.btn.ghost{background:var(--glass);border-color:var(--line-2);box-shadow:none;color:var(--fg)}
+.btn.ghost:hover{background:var(--glass-2);transform:none}
+.btn.cyan{background:var(--cyan);color:var(--cyan-ink);box-shadow:0 10px 24px -12px rgba(11,126,163,.5)}
+.btn.sm{padding:6px 14px;font-size:12.5px}
+.member-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+@media (max-width:980px){
+  .topbar-in{flex-wrap:wrap;gap:8px 10px;padding-block:10px}
+  .nav{order:3;flex-basis:100%;overflow-x:auto;scrollbar-width:none;margin-inline:0}
+  .nav::-webkit-scrollbar{display:none}
+  .actions{margin-left:auto}
+  .kbtn .klabel,.kbtn .kbd{display:none}
+  .brand-sub{display:none}
+  .actions .btn{padding:7px 13px;font-size:13px}
+}
+
+/* atlas (보험카테고리 지도) */
+.atlas{padding-block:22px 10px;max-width:1900px}
+.atlas-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.atlas-head h1{font-size:clamp(26px,3vw,40px);margin-top:12px}
+.atlas-head p{color:var(--fg-2);font-weight:300;font-size:14px;margin-top:6px;max-width:44em}
+.atlas-tools{display:flex;gap:6px;align-items:center}
+.ztool{font:inherit;font-family:var(--fm);font-size:13px;min-width:38px;height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line-2);background:var(--glass);color:var(--fg);cursor:pointer;transition:border-color .2s,background .2s}
+.ztool:hover{border-color:var(--cyan);background:var(--glass-2)}
+.atlas-frame{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:radial-gradient(ellipse at 40% 45%,rgba(47,91,234,.06),transparent 50%),radial-gradient(ellipse at 85% 20%,rgba(11,126,163,.05),transparent 45%),#FFFFFF;box-shadow:var(--shadow)}
+.atlas-svg{display:block;width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.zoomed .atlas-svg{cursor:grab}
+.atlas-svg text{font-family:var(--fb);pointer-events:none}
+.atlas-svg .eyeb{fill:var(--cyan);font-family:var(--fm);font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+.trunk line{stroke:rgba(11,126,163,.42);stroke-width:2;stroke-linecap:round}
+.ln{fill:none;stroke:rgba(16,26,51,.22);stroke-width:1.4;stroke-linecap:round;transition:stroke .25s,opacity .3s,stroke-width .25s}
+.nd{cursor:pointer;outline:none}
+.lbl{transition:transform .25s cubic-bezier(.2,.7,.2,1),opacity .3s;transform-box:fill-box;transform-origin:center}
+.lbl .sh{transition:fill .25s,stroke .25s,filter .25s}
+.lbl .tx{transition:fill .2s}
+.kM>.lbl>.sh{fill:url(#gM);stroke:rgba(255,255,255,.28);stroke-width:1}
+.kM>.lbl>.tx{fill:#fff;font-family:var(--fd);font-weight:800;letter-spacing:-.01em}
+.kS>.lbl>.sh{fill:#FFFFFF;stroke:rgba(11,126,163,.55);stroke-width:1.2}
+.kS>.lbl>.tx{fill:#101A33;font-family:var(--fd);font-weight:700}
+.ks>.lbl>.sh{fill:#FFFFFF;stroke:rgba(11,126,163,.38);stroke-width:1}
+.ks>.lbl>.tx{fill:#1E2A47;font-family:var(--fd);font-weight:700}
+.kt>.lbl>.tx{fill:#3E4A66}
+.nd.hv>.lbl{transform:scale(1.07)}
+.kX.hv>.lbl{transform:scale(1.025)}
+.nd.hv>.lbl>.sh{stroke:#0A7396;filter:drop-shadow(0 0 8px rgba(11,126,163,.35))}
+.kM.hv>.lbl>.sh{filter:drop-shadow(0 0 14px rgba(107,78,230,.45))}
+.nd.hv>.lbl>.tx{fill:#101A33}
+.kM.hv>.lbl>.tx{fill:#fff}
+.kt.hv>.lbl>.tx{fill:#0A7396}
+.nd:hover>.ln{stroke:#0A7396;stroke-width:2.2}
+.nd.hv .ln{stroke:rgba(11,126,163,.75)}
+.nd.hv .nd>.lbl>.tx{fill:#101A33}
+.nd:focus-visible>.lbl>.sh{stroke:#2F5BEA;stroke-width:2}
+.hov .nd:not(:hover):not(.hv .nd)>.lbl,.hov .nd:not(:hover):not(.hv .nd)>.ln{opacity:.32}
+.center{cursor:pointer;outline:none}
+.center .core{filter:drop-shadow(0 8px 22px rgba(47,91,234,.35))}
+.center:hover .core,.center:focus-visible .core{filter:drop-shadow(0 8px 30px rgba(11,126,163,.5))}
+.center .ring{fill:none;stroke:#2F8FD0;stroke-width:1.2;transform-box:fill-box;transform-origin:center;animation:cring 3.4s ease-out infinite}
+.center .r2{animation-delay:1.7s}
+@keyframes cring{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+.center .ct{fill:#fff;font-family:var(--fd);font-weight:800;font-size:22px;letter-spacing:-.02em}
+.center .cs{fill:rgba(255,255,255,.72);font-family:var(--fm);font-size:9.5px;letter-spacing:.22em}
+.kB>.lbl>.sh{fill:rgba(107,78,230,.07);stroke:#6B4EE6;stroke-width:1.4}
+.kB .tx{fill:#101A33;font-family:var(--fd);font-weight:800}
+.kB .tx2{fill:#5B3FD6;font-family:var(--fm);letter-spacing:.12em}
+.chain-ln{stroke:#6B4EE6;stroke-width:1.5}
+.chain{fill:url(#gChain);font-family:var(--fd);font-weight:700;letter-spacing:-.01em}
+.kX>.lbl>.sh{fill:#FFFFFF;stroke:var(--line-2);stroke-width:1}
+.kX .bn{fill:var(--cyan);font-family:var(--fm);letter-spacing:.12em}
+.kX .bl{fill:#1E2A47}
+.kX .bl.sub{fill:#5B6785}
+.kX.hv>.lbl>.sh{fill:rgba(11,126,163,.06)}
+.atlas-list{display:none}
+.atlas-list details{border:1px solid var(--line);border-radius:12px;background:var(--glass);margin-bottom:8px;padding:0 12px}
+.atlas-list .al-kids details{background:transparent;border:0;border-radius:0;margin:0;padding:0}
+.atlas-list summary{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;cursor:pointer;list-style:none;font-weight:600;font-size:14px}
+.atlas-list summary::-webkit-details-marker{display:none}
+.al-M>summary{font-family:var(--fd);font-weight:800;font-size:16px}
+.al-S>summary{color:var(--fg)}
+.al-kids{padding:0 0 8px 10px;border-left:1px solid var(--line);margin-left:4px}
+.al-item{display:block;padding:6px 0;color:var(--fg-2);text-decoration:none;font-size:13.5px;font-weight:300}
+.al-item:hover{color:var(--cyan)}
+.al-go{font-size:11px;color:var(--cyan);text-decoration:none;font-family:var(--fm);white-space:nowrap;flex-shrink:0}
+@media (max-width:760px){.atlas-frame,.atlas-tools{display:none}.atlas-list{display:block}}
+@media (prefers-reduced-motion:reduce){.center .ring{display:none}}
+
+/* sections */
+.sec{padding-block:24px 88px}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:30px}
+.sec-head h2{font-size:clamp(30px,3.4vw,44px);margin-top:14px}
+.sec-head p{color:var(--fg-2);max-width:34em;font-weight:300}
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:176px;gap:14px}
+.cell{position:relative;overflow:hidden;border-radius:var(--r);padding:22px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;min-width:0;transition:transform .3s,border-color .3s}
+.cell:hover{transform:translateY(-4px);border-color:rgba(11,126,163,.45)}
+.cell::before{content:"";position:absolute;inset:-40% auto auto -20%;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(47,91,234,.12),transparent 65%);pointer-events:none;transition:opacity .3s}
+.cell.v::before{background:radial-gradient(circle,rgba(107,78,230,.12),transparent 65%)}
+.cell.c::before{background:radial-gradient(circle,rgba(11,126,163,.10),transparent 65%)}
+.cell.big{grid-column:span 2;grid-row:span 2}
+.cell.wide{grid-column:span 2}
+.cell .tag{position:absolute;top:18px;left:22px;font-family:var(--fm);font-size:10.5px;letter-spacing:.16em;color:var(--cyan);text-transform:uppercase}
+.cell .n{position:absolute;right:20px;top:12px;font-family:var(--fd);font-weight:900;font-size:46px;color:rgba(16,26,51,.06);letter-spacing:-.05em;line-height:1}
+.cell h3{font-size:22px;margin-bottom:5px}
+.cell.big h3{font-size:36px}
+.cell p{font-size:13.5px;color:var(--fg-2);font-weight:300;line-height:1.6}
+.cell .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.cell .chip{font-size:12px;color:var(--fg-2);border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:rgba(16,26,51,.03)}
+@media (max-width:980px){.bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px}.cell.big{grid-column:span 2;grid-row:span 1}.cell.big h3{font-size:28px}.cell.big .chips{display:none}}
+@media (max-width:520px){.bento{grid-template-columns:1fr;grid-auto-rows:auto}.cell{min-height:150px}.cell.big,.cell.wide{grid-column:span 1}}
+
+/* lounge tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:980px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.tiles{grid-template-columns:1fr}}
+.tile{position:relative;border-radius:var(--r-s);padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0;min-height:160px;transition:border-color .25s,transform .25s;cursor:default}
+.tile[data-login]{cursor:pointer}
+.tile:hover{border-color:rgba(107,78,230,.5);transform:translateY(-3px)}
+.tile h3{font-size:17px}
+.tile p{font-size:13px;color:var(--fg-2);font-weight:300}
+.tile .st{font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;color:var(--mute);display:flex;align-items:center;gap:6px;margin-top:auto}
+.tile.open .st{color:var(--cyan)}
+.lock{width:14px;height:14px;flex-shrink:0}
+
+/* cta */
+.cta{position:relative;overflow:hidden;border-radius:var(--r);padding:52px 48px;margin-bottom:60px;background:linear-gradient(120deg,rgba(47,91,234,.09),rgba(107,78,230,.06) 50%,rgba(11,126,163,.06)),#FFFFFF;border:1px solid var(--line);box-shadow:var(--shadow)}
+.cta::before{content:"";position:absolute;inset:-60% -10% auto auto;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(11,126,163,.10),transparent 65%);pointer-events:none}
+.cta-in{position:relative;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:center}
+.cta h2{font-size:clamp(28px,3.2vw,40px);margin:12px 0 12px}
+.cta p{color:var(--fg-2);font-weight:300}
+.contact{border-radius:var(--r-s);padding:22px;display:flex;flex-direction:column;gap:12px;background:var(--glass-solid);border:1px solid var(--line)}
+.contact .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.contact .num{font-family:var(--fd);font-weight:800;font-size:24px;letter-spacing:-.02em;user-select:all;font-variant-numeric:tabular-nums}
+.contact small{color:var(--mute);font-size:12px}
+@media (max-width:860px){.cta{padding:32px 24px}.cta-in{grid-template-columns:1fr}}
+
+footer{padding-block:28px 56px;color:var(--mute);font-size:12.5px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-direction:column;gap:6px}
+
+/* page head */
+.pagehead{padding-block:52px 34px;position:relative}
+.pagehead::before{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--line-2),transparent)}
+.crumbs{font-family:var(--fm);font-size:12px;color:var(--mute);display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.crumbs a{text-decoration:none;color:var(--fg-2)}
+.crumbs a:hover{color:var(--cyan)}
+.pagehead h1{font-size:clamp(32px,4.4vw,56px);margin-bottom:14px}
+.pagehead p{color:var(--fg-2);max-width:40em;font-weight:300;font-size:16px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.tag{font-family:var(--fm);font-size:11px;letter-spacing:.04em;border:1px solid var(--line-2);border-radius:999px;padding:3px 10px;color:var(--fg-2);background:var(--glass)}
+.tag.cy{border-color:rgba(11,126,163,.45);color:var(--cyan)}
+.tag.warn{border-color:var(--warn-line);color:var(--warn)}
+
+/* category page */
+.docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;padding-block:34px 80px}
+.dcard{display:flex;flex-direction:column;gap:10px;text-decoration:none;border-radius:var(--r-s);padding:22px;min-width:0;transition:border-color .25s,transform .25s;position:relative;overflow:hidden}
+.dcard::before{content:"";position:absolute;inset:auto -30% -50% auto;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(47,91,234,.09),transparent 65%);pointer-events:none}
+.dcard:hover{border-color:rgba(11,126,163,.45);transform:translateY(-3px)}
+.dcard h3{font-size:19px}
+.dcard ul{margin:0;padding-left:16px;color:var(--fg-2);font-size:13px;line-height:1.7;font-weight:300}
+.dcard .foot{margin-top:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding-top:6px}
+
+/* doc page */
+.doc{display:grid;grid-template-columns:236px minmax(0,1fr) 196px;gap:40px;padding-block:36px 90px}
+@media (max-width:1150px){.doc{grid-template-columns:224px minmax(0,1fr)}.toc{display:none}}
+@media (max-width:820px){.doc{grid-template-columns:minmax(0,1fr)}.side{display:none}}
+.side,.toc{position:sticky;top:100px;align-self:start;max-height:calc(100vh - 124px);overflow:auto;scrollbar-width:thin}
+.side{border-radius:var(--r-s);padding:8px 12px}
+.side details{border-bottom:1px solid var(--line);padding-block:6px}
+.side details:last-child{border-bottom:0}
+.side summary{cursor:pointer;font-size:13.5px;font-weight:500;color:var(--fg-2);list-style:none;padding:5px 2px;display:flex;justify-content:space-between;align-items:center}
+.side summary::-webkit-details-marker{display:none}
+.side summary::after{content:"+";font-family:var(--fm);color:var(--mute)}
+.side details[open] summary::after{content:"–"}
+.side details[open] summary{color:var(--fg)}
+.side a{display:block;text-decoration:none;font-size:13px;color:var(--mute);padding:4px 0 4px 12px;border-left:1px solid var(--line);margin-left:2px}
+.side a:hover{color:var(--fg)}
+.side a.on{color:var(--cyan);border-left-color:var(--cyan)}
+.toc .pill{margin-bottom:12px}
+.toc a{display:block;text-decoration:none;font-size:12.5px;color:var(--mute);padding:4px 0}
+.toc a:hover{color:var(--cyan)}
+.article{min-width:0;max-width:720px}
+.article h2{font-size:26px;margin:56px 0 14px;padding-top:4px}
+.article h2:first-child{margin-top:0}
+.article h3{font-size:18px;margin:28px 0 10px}
+.article p{color:var(--fg-2);margin-bottom:14px}
+.article ul,.article ol{color:var(--fg-2);padding-left:20px;margin:0 0 16px}
+.article li{margin-bottom:6px}
+.article strong{color:var(--fg);font-weight:600}
+.note{border-radius:var(--r-s);padding:16px 18px;font-size:14px;color:var(--fg-2);margin:18px 0;background:linear-gradient(90deg,rgba(11,126,163,.07),rgba(255,255,255,.7));border:1px solid rgba(11,126,163,.25)}
+.note b{color:var(--cyan);font-weight:600}
+.law{font-family:var(--fm);font-size:11px;color:var(--cyan);border:1px solid rgba(11,126,163,.35);border-radius:6px;padding:0 6px;white-space:nowrap;background:rgba(11,126,163,.06)}
+.stub{border:1px dashed var(--line-2);border-radius:12px;padding:16px 18px;color:var(--mute);font-size:13.5px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:14px 0 20px;background:var(--glass)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--fm);font-size:11px;letter-spacing:.08em;color:var(--mute);font-weight:500;background:rgba(16,26,51,.03)}
+tr:last-child td{border-bottom:0}
+td:first-child{white-space:nowrap;color:var(--cyan);font-family:var(--fm);font-size:13px}
+.lb{border-radius:var(--r-s);padding:20px;margin:18px 0 24px}
+.lb-tabs{display:inline-flex;border:1px solid var(--line-2);border-radius:999px;padding:3px;gap:2px;margin-bottom:18px;background:rgba(16,26,51,.03)}
+.lb-tabs button{font:inherit;font-size:13px;font-weight:500;border:0;background:transparent;color:var(--fg-2);padding:6px 15px;border-radius:999px;cursor:pointer}
+.lb-tabs button.on{background:var(--grad);color:#fff}
+.lb-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,2fr);gap:10px 18px;align-items:center}
+.lb-axis{display:grid;grid-template-columns:repeat(4,1fr);font-family:var(--fm);font-size:11px;color:var(--mute);border-bottom:1px solid var(--line);padding-bottom:6px}
+.lb-axis span{text-align:right;padding-right:2px}
+.lb-label{font-size:13.5px;color:var(--fg);line-height:1.5}
+.lb-track{position:relative;height:22px;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),var(--line) calc(25% - 1px) 25%);border-radius:4px}
+.lb-bar{position:absolute;left:0;top:4px;bottom:4px;border-radius:4px;background:linear-gradient(90deg,var(--cyan),var(--blue) 60%,var(--violet));box-shadow:0 0 10px rgba(47,91,234,.22);transition:width .7s cubic-bezier(.5,0,.2,1)}
+.lb-cap{font-size:12px;color:var(--mute);margin-top:12px}
+@media (max-width:560px){.lb-grid{grid-template-columns:1fr;gap:4px}.lb-axis-label{display:none}.lb-track{margin-bottom:10px}}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 20px}
+@media (max-width:620px){.twocol{grid-template-columns:1fr}}
+.box{border-radius:var(--r-s);padding:18px;min-width:0}
+.box h4{margin:0 0 8px;font-size:14px;font-weight:700;color:var(--cyan)}
+.box ul{margin:0;font-size:13.5px}
+
+/* lock */
+.locked{position:relative;border-radius:var(--r-s);overflow:hidden;margin:16px 0 22px;border:1px solid var(--line);background:var(--glass)}
+.locked .ghosttext{padding:18px;display:flex;flex-direction:column;gap:10px;filter:blur(5px);opacity:.45;user-select:none;pointer-events:none}
+.locked .ghosttext i{display:block;height:10px;border-radius:5px;background:rgba(16,26,51,.14)}
+.locked .over{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px;background:linear-gradient(180deg,rgba(245,247,251,.35),rgba(245,247,251,.92));backdrop-filter:blur(2px)}
+.locked .over b{font-family:var(--fd);font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
+.locked .over span{font-size:12.5px;color:var(--fg-2)}
+.unlocked{border-radius:var(--r-s);padding:18px 20px;margin:16px 0 22px;background:linear-gradient(180deg,rgba(11,126,163,.06),rgba(255,255,255,.7));border:1px solid rgba(11,126,163,.3)}
+.badge-m{display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;color:var(--cyan-ink);background:var(--cyan);border-radius:999px;padding:2px 9px;margin-bottom:10px}
+
+/* sales page */
+.sales{display:grid;grid-template-columns:204px minmax(0,1fr);gap:44px;padding-block:40px 90px}
+@media (max-width:860px){.sales{grid-template-columns:minmax(0,1fr)}.rail{display:none}}
+.rail{position:sticky;top:104px;align-self:start;display:flex;flex-direction:column}
+.rail a{position:relative;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--mute);font-size:13.5px;padding:8px 0}
+.rail a::before{content:"";position:absolute;left:12px;top:-50%;height:100%;width:1px;background:var(--line);z-index:-1}
+.rail a:first-child::before{display:none}
+.rail a .d{width:26px;height:26px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;font-family:var(--fd);font-weight:700;font-size:11px;background:var(--bg);transition:all .3s}
+.rail a.on{color:var(--fg);font-weight:600}
+.rail a.on .d{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 4px 14px rgba(47,91,234,.4)}
+.rail a.done .d{border-color:rgba(11,126,163,.5);color:var(--cyan)}
+.steps{display:flex;flex-direction:column;gap:22px;min-width:0}
+.step{position:relative;border-radius:var(--r);padding:30px;overflow:hidden;transition:border-color .4s,box-shadow .4s}
+.step::before{content:"";position:absolute;inset:-30% auto auto -10%;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(47,91,234,.08),transparent 65%);pointer-events:none;opacity:0;transition:opacity .4s}
+.step.on{border-color:rgba(11,126,163,.4);box-shadow:0 30px 60px -40px rgba(47,91,234,.35)}
+.step.on::before{opacity:1}
+.step .bgnum{position:absolute;right:22px;top:6px;font-family:var(--fd);font-weight:900;font-size:120px;line-height:1;color:rgba(16,26,51,.05);letter-spacing:-.06em;pointer-events:none;user-select:none;transition:color .4s}
+.step.on .bgnum{color:rgba(11,126,163,.13)}
+.step-k{position:relative;font-family:var(--fm);font-size:11px;letter-spacing:.16em;color:var(--cyan);text-transform:uppercase}
+.step h2{position:relative;font-size:clamp(24px,2.8vw,32px);margin:8px 0 12px}
+.quote{position:relative;font-family:var(--fd);font-weight:700;font-size:17px;border-left:2px solid var(--cyan);padding-left:14px;margin-bottom:14px}
+.quote .gt{font-weight:700}
+.step .intro{position:relative;color:var(--fg-2);max-width:44em;margin-bottom:18px;font-weight:300}
+.checks{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:18px}
+.check{border-radius:12px;padding:14px;background:rgba(255,255,255,.75);border:1px solid var(--line)}
+.check b{display:block;font-family:var(--fd);font-weight:700;font-size:14px;margin-bottom:4px}
+.check span{font-size:13px;color:var(--fg-2);line-height:1.6;display:block;font-weight:300}
+.tip{position:relative;font-size:13.5px;color:var(--fg-2);border-radius:10px;padding:10px 14px;background:rgba(255,255,255,.75);border:1px solid var(--line)}
+.tip b{color:var(--cyan);font-family:var(--fm);font-weight:500;font-size:11px;letter-spacing:.14em;margin-right:8px}
+.scripts{display:flex;flex-direction:column;gap:10px}
+.script{border-left:2px solid var(--violet);padding:4px 0 4px 14px}
+.script b{font-size:13px;color:#5B3FD6;font-weight:600;display:block;margin-bottom:4px}
+.script p{font-size:14px;color:var(--fg-2)}
+.diag{position:relative;border-radius:var(--r-s);padding:18px;margin-bottom:18px;background:rgba(255,255,255,.75);border:1px solid var(--line)}
+.diag-q{font-family:var(--fd);font-size:15px;font-weight:700;margin-bottom:12px}
+.diag-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.diag-opts{grid-template-columns:1fr}}
+.diag-opts button{font:inherit;font-size:13.5px;text-align:left;border:1px solid var(--line-2);background:var(--glass);color:var(--fg);border-radius:10px;padding:11px 13px;cursor:pointer;transition:border-color .2s,background .2s}
+.diag-opts button:hover{border-color:rgba(11,126,163,.5)}
+.diag-opts button.on{border-color:var(--cyan);background:rgba(11,126,163,.1)}
+.diag-out{margin-top:12px;font-size:14px;color:var(--fg-2);min-height:1.5em}
+.diag-out a{color:var(--cyan)}
+
+/* glossary */
+.gtools{display:flex;gap:10px;padding-block:28px 6px}
+.gtools input{flex:1;max-width:440px;font:inherit;font-size:15px;background:var(--glass);border:1px solid var(--line-2);color:var(--fg);border-radius:14px;padding:12px 16px}
+.gtools input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 4px rgba(11,126,163,.1)}
+.glist{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;padding-block:18px 80px}
+.gitem{border-radius:var(--r-s);padding:20px;min-width:0;transition:border-color .25s}
+.gitem h3{font-size:17px;margin-bottom:6px}
+.gitem p{font-size:13.5px;color:var(--fg-2);font-weight:300}
+.gitem.hl{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(11,126,163,.1)}
+
+/* term hover */
+.term{color:var(--cyan);border-bottom:1px dotted rgba(11,126,163,.6);cursor:help}
+.tip-pop{position:fixed;z-index:80;max-width:300px;background:var(--glass-solid);border:1px solid rgba(11,126,163,.35);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:14px;padding:13px 15px;font-size:13px;line-height:1.6;color:var(--fg);box-shadow:0 18px 40px -14px rgba(16,26,51,.28);pointer-events:none}
+.tip-pop b{display:block;font-family:var(--fd);color:var(--fg);font-size:14.5px;margin-bottom:4px}
+
+/* palette & modal */
+.scrim{position:fixed;inset:0;z-index:90;background:rgba(16,26,51,.32);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:flex-start;justify-content:center;padding:12vh 16px 16px}
+.pal{width:100%;max-width:640px;background:var(--glass-solid);border:1px solid var(--line-2);border-radius:20px;box-shadow:0 30px 70px -24px rgba(16,26,51,.35);overflow:hidden;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.pal-in{display:flex;align-items:center;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line)}
+.pal-in input{flex:1;font:inherit;font-size:16px;background:transparent;border:0;color:var(--fg);outline:none;min-width:0}
+.pal-res{max-height:52vh;overflow:auto;padding:6px}
+.pal-res a{display:flex;justify-content:space-between;gap:12px;text-decoration:none;padding:10px 12px;border-radius:10px;font-size:14px}
+.pal-res a span{color:var(--mute);font-size:12px;font-family:var(--fm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%}
+.pal-res a.sel{background:rgba(47,91,234,.08);color:var(--fg)}
+.pal-res mark{background:none;color:var(--cyan);font-weight:600}
+.pal-empty{padding:18px;color:var(--mute);font-size:13.5px}
+.pal-foot{display:flex;gap:14px;padding:9px 16px;border-top:1px solid var(--line);font-size:11px;color:var(--mute);font-family:var(--fm);flex-wrap:wrap}
+.modal{width:100%;max-width:460px;background:var(--glass-solid);border:1px solid var(--line-2);border-radius:22px;padding:28px;display:flex;flex-direction:column;gap:14px;box-shadow:0 30px 70px -24px rgba(16,26,51,.35);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.modal h3{font-size:24px}
+.modal p{color:var(--fg-2);font-size:14px;font-weight:300}
+.flowline{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;font-family:var(--fm);color:var(--mute)}
+.flowline b{color:var(--fg);font-weight:500;border:1px solid var(--line-2);border-radius:8px;padding:4px 9px;background:var(--glass)}
+.modal .acts{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:4px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:95;background:var(--cyan);color:var(--cyan-ink);font-size:13.5px;font-weight:600;padding:9px 18px;border-radius:999px;box-shadow:0 10px 26px -10px rgba(11,126,163,.5);white-space:nowrap}
+
+/* reveal */
+.rv{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js-rv .rv:not(.in){opacity:0;transform:translateY(18px)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .js-rv .rv:not(.in){opacity:1;transform:none}
+}
+</style>
 </head>
 <body>
-<header class="site-header"><a class="site-title" href="/">보험위키</a></header>
-<nav class="breadcrumb"><a href="/">홈</a></nav>
-<main class="content">
-<h1>보험위키</h1>
-<p>보험 지식을 분야별로 정리한 위키입니다. 아래 항목을 눌러 들어가세요.</p>
-<ul class="child-list">
-<li><a href="/category/">보험 카테고리</a></li>
-<li><a href="/disclosure/">고지의무</a></li>
-<li><a href="/more/">그외</a></li>
-<li><a href="/sales/">세일즈 프로세스</a></li>
-</ul>
-</main>
-<footer class="site-footer">보험위키 · 내용 준비 중</footer>
+
+
+<div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+<div class="noise" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#home" aria-label="프라임 보험위키 홈">
+      <span class="brand-mark">PRIME<b>WIKI</b></span>
+      <span class="brand-sub">Insurance Knowledge OS</span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#home" data-r="home">지식지도</a>
+      <a href="#cat-hospital" data-r="cat">상품</a>
+      <a href="#doc-disclosure" data-r="doc">고지의무</a>
+      <a href="#sales" data-r="sales">세일즈</a>
+      <a href="#glossary" data-r="glossary">용어</a>
+      <a href="#lounge" data-r="lounge">라운지</a>
+    </nav>
+    <div class="actions">
+      <button class="kbtn" id="openPal" type="button" aria-label="검색 열기">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <span class="klabel">검색</span><span class="kbd">Ctrl K</span>
+      </button>
+      <button class="btn" id="authBtn" type="button">설계사 로그인</button>
+    </div>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer>
+  <div class="wrap">
+    <div><span class="brand-mark" style="font-size:15px">PRIME<b style="color:var(--cyan)">WIKI</b></span> · 프라임에셋 프리미엄사업부</div>
+    <div>본 위키는 보험 일반 지식을 제공하기 위한 자료입니다. 개별 상품의 보장 내용과 조건은 해당 상품의 약관과 상품설명서를 따릅니다.</div>
+    <div>원본 구조: 보험카테고리 v3.0 · 세일즈 프로세스 · 고객관리 표준 매뉴얼 &nbsp;|&nbsp; 프로토타입 v3 · 2026.10</div>
+  </div>
+</footer>
+
+<div class="scrim" id="palScrim" hidden>
+  <div class="pal" role="dialog" aria-modal="true" aria-label="위키 검색">
+    <div class="pal-in">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--cyan)" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="palInput" type="text" placeholder="문서, 단계, 용어 검색 (초성 가능: ㄱㅈㅇㅁ)" autocomplete="off" aria-label="검색어">
+      <span class="kbd">Esc</span>
+    </div>
+    <div class="pal-res" id="palRes"></div>
+    <div class="pal-foot"><span>↑↓ 이동</span><span>Enter 열기</span><span>초성 검색 지원</span></div>
+  </div>
+</div>
+
+<div class="scrim" id="loginScrim" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <span class="pill"><i></i>Members only</span>
+    <h3 id="loginTitle">통합페이지 로그인으로 열람</h3>
+    <p>실전 화법, 상품 비교, 고객관리 매뉴얼 원문은 소속 설계사만 볼 수 있습니다. 운영 버전에서는 프리미엄사업부 통합페이지에 한 번 로그인하면 위키의 전용 영역이 함께 열립니다.</p>
+    <div class="flowline"><b>통합페이지 로그인</b>→<b>인증 토큰</b>→<b>위키 전용 영역</b></div>
+    <p style="font-size:12.5px;color:var(--mute)">프로토타입이라 실제 인증은 없습니다. 아래 버튼으로 로그인 후 화면을 미리 볼 수 있습니다.</p>
+    <div class="acts">
+      <button class="btn ghost" type="button" data-close>닫기</button>
+      <button class="btn" type="button" id="demoLogin">설계사 화면 미리보기</button>
+    </div>
+  </div>
+</div>
+
+<div class="tip-pop" id="tipPop" hidden role="tooltip"></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+"use strict";
+var LOCK='<svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>';
+var REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.documentElement.classList.add('js-rv');
+
+/* ================= DATA ================= */
+var STEPS=[
+ {n:1,k:'Prospecting',name:'가망고객 확보',short:'가망고객',quote:'연락이 닿지 않는 사람은 고객이 아니다.',
+  intro:'좋은 가망고객은 세 가지 조건을 갖춰야 합니다.',
+  checks:[['연락 가능성','전화나 톡이 가능한가. 연락조차 안 되면 가망고객이 아닙니다.'],['니즈','보험에 대한 필요성이 있는가. 니즈가 전혀 없다면 상담 난이도가 높아집니다.'],['신뢰도','나를 믿거나 관계가 있는가. 자발적 소개나 기존 신뢰 관계가 있는 고객이 가장 좋습니다.']],
+  tip:'지인 영업만 고집하지 마세요. 온라인영업, DB영업, 기존 고객 관리로 가망고객을 계속 업데이트하는 것이 롱런의 비결입니다.',scripts:[]},
+ {n:2,k:'Approach · AP',name:'접근',short:'AP',quote:'첫인상이 영업의 절반이다.',
+  intro:'AP의 목적은 신뢰도 높이기와 분위기 전환, 두 가지입니다. 고객은 설계사라는 직업 자체에 대한 신뢰가 낮습니다. 보험 이야기 전에 고객을 위해 일하는 전문가라는 점부터 보여주세요.',
+  checks:[['신뢰 안내','첫 인사에서 명함 전달, 상담 절차와 기준 안내로 신뢰를 주고 있는가'],['분위기 전환','칭찬, 공통 관심사, 아이스브레이킹으로 관계를 풀었는가']],
+  tip:'자신만의 레퍼토리를 만드세요. 사투리도 훌륭한 무기가 됩니다.',
+  scripts:[['신뢰 구축','"고객님, 저는 단순히 상품을 파는 것이 아니라, 고객님께 가장 유리한 보험을 찾아드리는 역할을 합니다."'],['아이스브레이킹','"처음 뵙겠습니다. 저는 완벽한 서울말을 사용하는데 사실 부산사람입니다."'],['칭찬','"새로 나온 상품인데 벌써 관심을 가지시다니 정말 대단하십니다."']]},
+ {n:3,k:'Needs',name:'니즈 환기',short:'니즈환기',quote:'고객이 스스로 필요하다고 느끼게 만들어라.',
+  intro:'대부분의 고객은 보험 니즈가 크지 않습니다. 감성에 기대기보다 객관적이고 예측 가능한 사례로 설명하세요. 보험 목적 카테고리와 질병 관련 니즈를 활용하면 효과적입니다.',
+  checks:[['보장공백 안내','카테고리별로 현재 보험의 공백을 짚어주었는가'],['맞춤형 질병 리스크','병력과 가족력을 확인해 막연한 불안을 구체적인 질병 리스크로 설명했는가']],
+  tip:'감정보다 근거. 통계와 가족력처럼 고객이 직접 확인할 수 있는 사실로 이야기하세요.',
+  scripts:[['카테고리 확장 (사망·연금)','"고객님, 현재 의료비 보장은 아주 탄탄하게 잘 되어 있으십니다. 그런데 한 가지 놓치고 계신 게 있어요. 집에 소화기는 잘 비치해 두셨는데, 정작 집 자체가 무너졌을 때를 대비한 기둥(사망보장/연금)은 약한 상태입니다. 치료를 잘 받는 것도 중요하지만, 가장의 부재나 은퇴 후 돈이 계속 들어가는 상황에 대한 대비도 함께 보셔야 합니다."'],['가족력·병력 활용','"사전에 말씀해 주신 가족력을 보니 어머님께서 혈압 관련 질환이 있으셨더라고요. 유전적 요인은 내가 아무리 운동을 열심히 해도 통제하기 어려운 영역입니다. 그래서 이번 설계에서는 다른 건 몰라도 뇌/심장 보장만큼은 남들보다 더 두껍게 가져가시는 것을 추천드립니다."']]},
+ {n:4,k:'Fact Finding · FF',name:'정보 수집',short:'FF',quote:'아는 만큼 설계하고 제안할 수 있다.',
+  intro:'FF는 서류 작성이 아니라 고객에게 닥칠 미래의 위험을 예측하는 과정입니다. 병력과 가족력을 파악하면 막연한 걱정이 특정 질병으로 구체화되고, 설계의 명분이 생깁니다.',
+  checks:[['의학적 상담의 관점','병력·가족력 질문이 위험 예측 과정임을 고객이 이해하고 있는가'],['가족 단위로 확장','배우자, 자녀, 부모님까지 가족 단위 보장 분석으로 상담 규모를 키웠는가'],['기존 보험에 대한 태도','"지금 보험에 만족하시나요?"로 숨은 불만과 미충족 니즈를 찾았는가']],
+  tip:'건강검진의 추적 관찰·주의 판정 항목은 그 자체로 상담의 중심 포인트가 됩니다.',
+  scripts:[['가족력·병력 확인','"고객님, 보험을 가장 똑똑하게 가입하는 방법은 나에게 일어날 확률이 가장 높은 일부터 막는 것입니다. 혹시 부모님이나 친척분들 중에 혈압, 당뇨 혹은 암으로 고생하신 분이 계신가요?"'],['가족관계 확인','"보통 한 분의 건강이 무너지면 가족 전체의 경제 상황이 흔들리곤 합니다. 실례지만 지금 배우자분이나 자녀분들의 보험도 고객님께서 직접 관리하고 계신가요?"'],['생활습관·검진 확인','"고객님께서는 평소에 정기적으로 건강검진을 받고 계신가요? 최근 검진에서 추적 관찰이나 주의 판정을 받은 항목이 있다면, 그 부분이 오늘 가장 집중해서 살펴볼 포인트입니다."']]},
+ {n:5,k:'Presentation · PT',name:'제안',short:'PT',quote:'설명은 심플하게, 선택은 확실하게.',
+  intro:'여러 안을 늘어놓아 고객을 혼란스럽게 하지 마세요. 검토를 끝낸 최선의 단일안을 추천하는 것이 기본입니다. 고객이 망설일 때만 기준점이 되는 비교안을 꺼냅니다.',
+  checks:[['선비교 후제안','수치와 회사별 특징을 언급해 이미 비교 검토가 끝났음을 보여주었는가'],['단일안의 근거','FF에서 확인한 가족력·병력·보장공백과 설계를 연결했는가'],['대조 효과','망설일 때 비교안을 보여 추천안을 선택할 이유를 다시 확인시켰는가']],
+  tip:'"이게 추천견적입니다"보다 "왜 고객님께 맞는지"를 먼저 말하세요.',
+  scripts:[['이미 검토는 끝났습니다','"고객님, 제가 여러 보험사 상품을 고객님의 연령과 가족력에 맞춰 미리 시뮬레이션해 봤습니다. 보장내용과 가격의 합리성을 따졌을 때 이 설계안이 가장 나은 결론입니다."'],['단일안 제안','"가장 중요한 암 진단비와 가족력이 있으셨던 뇌/심장 질환을 중심으로 설계했습니다. 이것저것 넣어 보험료만 높이기보다, 정말 일어날 법한 위험만 확실하게 막았습니다."'],['결정을 미룰 때','"혹시 어떤 부분이 고민되실까요? (비교 견적을 보여주며) 보시다시피 처음 드린 안이 가장 좋은 조건이라는 걸 확인하실 수 있습니다."']]},
+ {n:6,k:'Closing · CL',name:'클로징',short:'클로징',quote:'계약은 강요가 아니라 확인하는 과정이다.',
+  intro:'앞선 과정(AP·니즈·FF·PT)이 단단했다면 계약은 자연스러운 결과입니다. 마지막에 고객이 망설인다면 클로징 기술보다 앞 단계 어딘가에 구멍이 있다는 신호입니다.',
+  checks:[],diag:true,
+  tip:'"그래서 하실 건가요? 선물 잘 챙겨드릴게요." 같은 질문형 클로징은 피하세요.',
+  scripts:[['정상 클로징','"고객님, 상담을 통해 가족력에 대한 불안은 덜어내고, 부족했던 수술비까지 채워 넣었습니다. 월 보험료도 말씀하신 예산 안에 맞췄으니, 오늘부터 바로 보장을 시작하시죠."'],['예산 고민 (FF 재점검)','"제안드린 플랜이 가장 좋은 조건입니다. 비슷한 조건으로 다른 비교견적을 한번 드리겠습니다. 가격이 오히려 더 비싸집니다."'],['신뢰 부족 (AP 재점검)','"제가 이 일을 하면서 가장 자부심을 느끼는 건 계약이 아니라 보상입니다. 고객님이 아프실 때 가장 먼저 달려와 청구를 도와드리겠습니다."'],['결정 장애 (PT·니즈 재점검)','"보험은 나이가 한 살이라도 어릴 때, 병력이 생기기 전인 지금이 보장 범위가 가장 넓고 저렴합니다."']]},
+ {n:7,k:'Management',name:'계약 및 사후관리',short:'사후관리',quote:'계약은 끝이 아니라 소개와 업셀링을 향한 시작이다.',
+  intro:'계약은 고객이 나를 전문가로 인정했다는 증거입니다. 이때부터의 관리가 설계사의 연봉을 결정합니다. 잘 관리된 고객 한 명은 수십 명의 잠재 고객을 데려오는 마케팅 채널이 됩니다.',
+  checks:[['소개의 선순환','신규 개척보다 관리를 통한 소개가 계약 성사율이 높습니다'],['업셀링의 기회','결혼·출산·승진 같은 생애주기 추가 설계는 신뢰가 쌓인 뒤에만 가능합니다'],['전문가의 증명','보험의 가치는 보상받는 순간 결정됩니다. 그때 곁에 있는 설계사가 진짜 전문가입니다']],
+  tip:'계약 직후 첫 연락 일정을 바로 캘린더에 잡아두세요.',
+  scripts:[['계약 마무리','"고객님, 계약 절차가 모두 마무리되었습니다. 하지만 제 진짜 업무는 오늘부터 시작입니다. 이런 사람이라면 가족과 지인을 맡겨도 되겠다는 확신이 드실 수 있게 관리하겠습니다."']]},
+ {n:8,k:'Referral',name:'소개 & 스케줄 관리',short:'소개',quote:'소개는 부탁하는 게 아니라 자발적으로 나오는 것이다.',
+  intro:'전문가로서 자리를 지키고 꾸준히 유익한 정보를 주면 소개는 자연스럽게 나옵니다. 이 선순환이 완성되면 영업은 거절이 두려운 일이 아니라 정답을 알려주는 일이 됩니다.',
+  checks:[['구글 캘린더','지난 일이 아니라 앞으로의 고객관리 일정을 기록하세요'],['자료 보관','고객 자료는 비공개 공간에 체계적으로 저장하고, 개인정보 보호 기준을 지키세요']],
+  tip:'세일즈 프로세스는 계약 기술이 아니라 전문가의 로드맵입니다.',scripts:[]}
+];
+
+var CATS=[
+ {id:'hospital',name:'병원비보험',g:'PRODUCT',desc:'치료비와 진단비로 의료비 부담을 덜어주는 보장. 실손부터 3대진단비, 수술비까지.',children:[
+  {id:'silson',name:'실손의료비',items:['일반실손 · 유병자실손 · 노후실손','보상조건: 입원/통원, 상해/질병 면책사항','유지조건: 갱신·재가입 조건과 전환실손','가입시기별 조건 차이','국민건강보험과 상품의 구조']},
+  {id:'diag',name:'3대진단비',items:['암: 일반암과 소액암(갑상선·경계성·제자리 등)','고액암(3대·5대·10대·16대 고액암 등)','재진단암과 이차암','암수술비와 암입원일당','뇌질환: 뇌혈관질환 · 뇌졸중 · 뇌출혈 · 뇌경색','심장질환: 허혈성심장질환']},
+  {id:'disab',name:'후유장해',items:['질병후유장해','상해후유장해','장해분류표 읽는 법']},
+  {id:'liab',name:'배상책임',items:['자녀 · 일상 · 가족 일상생활배상책임','배상책임 보상 사례']},
+  {id:'driver',name:'운전자보험',items:['교통사고처리지원금(형사합의금)','벌금','변호사선임비용','교통사고 부상치료비']},
+  {id:'surg',name:'수술비',items:['수술의 정의와 사례','생명보험 종수술비와 손해보험 특정수술비']},
+  {id:'hosp-etc',name:'입원일당 · 기타',items:['입원일당','기타 병원비 담보']}]},
+ {id:'death',name:'사망보험',g:'PRODUCT',desc:'가장의 부재에 대비하는 보장. 종신과 정기의 구조, 사망 원인별 보장 차이.',children:[
+  {id:'whole',name:'종신보험',items:['종신보험의 구조','CI보험과 GI보험','"중대한"의 의미와 컨셉','납입면제 · 추가납입 · 중도인출 · 납입정지 · 연금전환']},
+  {id:'termlife',name:'정기보험',items:['정기보험의 구조와 활용']},
+  {id:'accdeath',name:'재해사망과 상해사망',items:['재해사망과 상해사망의 차이','상해의 입증요소: 외래성 · 우연성 · 급격성']},
+  {id:'disdeath',name:'질병사망과 일반사망',items:['질병사망과 일반사망의 차이','사망의 원인과 확률, 보장범위']}]},
+ {id:'annuity',name:'저축·연금보험',g:'PRODUCT',desc:'노후와 목돈을 준비하는 상품. 공시이율형과 변액형, 세제 조건.',children:[
+  {id:'fixed',name:'공시이율형 상품',items:['연금저축: 세액공제의 개념과 장단점','연금펀드','연금보험','저축보험','종신보험을 이용한 저축플랜']},
+  {id:'variable',name:'변액투자형 상품',items:['변액유니버셜 저축보험(VUL)','변액연금보험(VA)','변액상품의 펀드 개념과 관리 방법']},
+  {id:'taxfree',name:'비과세와 상품 비교',items:['비과세 및 비과세 조건','상품 기능별 차이점']}]},
+ {id:'fire',name:'화재보험',g:'PRODUCT',desc:'주택과 사업장의 재산 손해를 보장하는 상품의 구조와 담보.',children:[
+  {id:'fire-basic',name:'화재보험의 구조와 종류',items:['화재보험의 의의','화재보험의 구조 및 종류']},
+  {id:'fire-cover',name:'화재보험 담보구성',items:['화재보험의 담보 구성']}]},
+ {id:'auto',name:'자동차보험',g:'PRODUCT',desc:'대인·대물부터 자기신체사고와 자동차상해의 차이까지.',children:[
+  {id:'auto-cover',name:'대인 · 대물 · 자손/자상',items:['대인배상','대물배상','자기신체사고와 자동차상해의 차이']},
+  {id:'auto-terms',name:'자동차보험 약관과 특약',items:['자동차보험 약관','추가 가능한 특약과 가입 팁']}]},
+ {id:'terms',name:'약관',g:'RULES',desc:'보험계약의 규칙. 상법과 보험업법, 보통약관, 분쟁사례.',children:[
+  {id:'law',name:'상법과 보험업법',items:['상법 보험편과 보험업법의 역할']},
+  {id:'general',name:'보통약관',items:['부담보','실효와 부활','납입면제','청약철회','계약 전 알릴 의무']},
+  {id:'special',name:'특별약관',items:['특별약관의 구조']},
+  {id:'dispute',name:'분쟁사례와 판례',items:['분쟁사례 및 판례 정리']}]},
+ {id:'goji',name:'고지의무·보상',g:'RULES',desc:'계약 전 알릴 의무와 보험금 청구. 인수와 보상을 가르는 지점.',children:[
+  {id:'disclosure',name:'고지의무 (일반 · 간편)',sample:true,items:['계약 전 알릴 의무란','일반심사 고지 항목','간편고지(3·2·5)','위반 시 처리와 해지 제한','실무 체크포인트']},
+  {id:'claim',name:'보험금 청구 절차',items:['보험금 청구 및 절차','고지의무 적용 방법과 보상']},
+  {id:'benef',name:'수익자 지정',items:['수익자 지정 및 케이스']}]},
+ {id:'basics',name:'상품 기초개념',g:'RULES',desc:'설계 전에 반드시 구분해야 할 상품 구조와 용어.',children:[
+  {id:'renew',name:'갱신형과 비갱신형',items:['갱신형과 비갱신형의 구조','보험료 비교 시 주의점']},
+  {id:'refund',name:'환급형과 순수보장형',items:['환급형과 순수보장형','적립보험료의 의미']},
+  {id:'maturity',name:'80세 만기와 100세 만기',items:['만기 선택 기준']},
+  {id:'nonrefund',name:'납입기간과 무해지상품',items:['납입기간 설정','무해지환급형 상품의 구조']},
+  {id:'disease',name:'주요 질병과 인수기준',items:['주요 질병의 원인 · 통계 · 치료법','질병별 인수기준']}]},
+ {id:'channel',name:'판매채널·영업',g:'SALES',desc:'원수사와 GA의 구조, 대면영업과 비대면영업 방식.',children:[
+  {id:'ga',name:'원수사와 GA',items:['원수사','대리점(GA): 연합형과 독립형','영업규정 · 수수료 · 근무환경']},
+  {id:'offline',name:'대면영업',items:['지인 · DB · 브리핑 · 개척 · 법인영업','재무설계: 수입/지출 · 상품관리','금융기초: 은행 · 증권사 · 보험사','정보받기 → 재무목표 설정 → 상품제안']},
+  {id:'online',name:'비대면영업',items:['카페 · 댓글 · 광고 · SNS · 블로그','블로그 포스팅 기본 양식과 상위노출 로직','블로그 컨셉 잡기와 로열키워드','검색량 · 포스팅 수 · 제한키워드 · 노출기준 확인','유튜브 · 네이버TV · SNS 마케팅']}]},
+ {id:'sales',name:'세일즈 프로세스',g:'SALES',desc:'가망고객 발굴부터 소개까지, 계약이 만들어지는 8단계.',route:'sales',
+  children:STEPS.map(function(s){return {id:'step-'+s.n,name:s.n+'. '+s.name,step:s.n};})}
+];
+var GROUP_KO={PRODUCT:'상품',RULES:'제도',SALES:'영업'};
+
+var GLOSS=[
+ ['goji','고지의무 (계약 전 알릴 의무)','청약할 때 보험회사가 질문한 중요한 사항을 사실대로 알려야 하는 의무. 위반하면 계약이 해지되거나 보험금이 지급되지 않을 수 있습니다.'],
+ ['simple','간편고지','고지 질문을 줄여 유병자도 가입할 수 있게 한 심사 방식. 보험료는 일반심사보다 높은 편입니다.'],
+ ['bojang','보장개시일','보험회사의 보장 책임이 시작되는 날. 암 보장처럼 별도의 대기기간이 있는 담보도 있습니다.'],
+ ['renew','갱신형','정해진 주기마다 보험료를 다시 산정하는 구조. 초기 보험료는 낮지만 갱신 때 오를 수 있습니다.'],
+ ['nonrenew','비갱신형','납입기간 동안 보험료가 고정되는 구조.'],
+ ['nonrefund','무해지환급형','납입기간 중 해지하면 해지환급금이 없거나 적은 대신 보험료가 저렴한 상품.'],
+ ['silson','실손의료비','실제 부담한 의료비를 약관 기준에 따라 보상하는 보험. 가입 시기에 따라 자기부담금과 보상 조건이 다릅니다.'],
+ ['napmyeon','납입면제','약관에서 정한 사유가 생기면 이후 보험료를 내지 않아도 보장이 유지되는 기능.'],
+ ['budambo','부담보','특정 부위나 질병을 일정 기간 또는 전 기간 보장에서 빼고 인수하는 조건.'],
+ ['silhyo','실효','보험료 미납으로 납입최고기간이 지나 계약의 효력이 없어지는 것.'],
+ ['buhwal','부활','실효된 계약을 해지환급금을 받지 않았다면 정해진 기간 안에 다시 살리는 것. 다시 심사를 받습니다.'],
+ ['cheolhoe','청약철회','보험증권을 받은 날부터 15일 이내(청약일부터 30일 이내)에 청약을 취소할 수 있는 제도. 일부 계약은 예외입니다.'],
+ ['wonsu','원수사','보험상품을 직접 만들고 보험금을 지급하는 보험회사.'],
+ ['GA','GA (법인보험대리점)','여러 보험회사의 상품을 비교해 판매하는 독립 대리점.'],
+ ['AP','AP (Approach)','세일즈 2단계. 신뢰를 만들고 분위기를 전환하는 접근 단계.'],
+ ['FF','FF (Fact Finding)','세일즈 4단계. 병력·가족력·기존 보험·예산을 파악하는 정보 수집 단계.'],
+ ['PT','PT (Presentation)','세일즈 5단계. 검토를 끝낸 설계안을 제안하는 단계.'],
+ ['CL','CL (Closing)','세일즈 6단계. 앞선 과정을 확인하며 계약으로 마무리하는 단계.']
+];
+var GMAP={};GLOSS.forEach(function(g){GMAP[g[0]]=g;});
+function T(k,label){var g=GMAP[k];return '<span class="term" tabindex="0" data-t="'+k+'">'+(label||g[1].split(' (')[0])+'</span>';}
+
+/* ================= STATE ================= */
+var member=false;
+try{member=sessionStorage.getItem('pw-member')==='1';}catch(e){}
+var pendingTarget=null, observers=[];
+var app=document.getElementById('app');
+
+function findChild(id){for(var i=0;i<CATS.length;i++){var c=CATS[i];for(var j=0;j<c.children.length;j++){if(c.children[j].id===id)return {cat:c,doc:c.children[j]};}}return null;}
+function catById(id){for(var i=0;i<CATS.length;i++){if(CATS[i].id===id)return CATS[i];}return null;}
+function docHref(ch){return ch.step?'#sales" data-target="step-'+ch.step:'#doc-'+ch.id;}
+function totalDocs(){var n=0;CATS.forEach(function(c){if(!c.route)n+=c.children.length;});return n+1;}
+
+/* ================= LOCK ================= */
+function lockBlock(title,desc,inner){
+  if(member){return '<div class="unlocked"><span class="badge-m">'+LOCK+' MEMBERS</span>'+inner+'</div>';}
+  var ghost='';for(var i=0;i<5;i++){ghost+='<i style="width:'+(60+((i*37)%38))+'%"></i>';}
+  return '<div class="locked"><div class="ghosttext">'+ghost+'</div><div class="over"><b>'+LOCK+title+'</b><span>'+desc+'</span><button class="btn sm" type="button" data-login>로그인하고 보기</button></div></div>';
+}
+
+/* ================= ATLAS (보험카테고리 지도) ================= */
+/* 노드: [label, kind, route, target, children]  kind: M=main pill, S=sub pill, s=small pill, t=text */
+function N(t,k,to,tg,ch){return {t:t,k:k,to:to,tg:tg||null,ch:ch||[]};}
+var MAP={
+ left:[
+  N('병원비보험','M','cat-hospital',null,[
+    N('1. 실손의료비','S','doc-silson',null,[
+      N('일반실비/유병자실비/노후실비','t','doc-silson','s0'),
+      N('가입시기별 조건','t','doc-silson','s3',[
+        N('보상조건','t','doc-silson','s1',[N('입원/통원, 상해/질병 면책사항','t','doc-silson','s1')]),
+        N('유지조건','t','doc-silson','s2',[N('실비의 갱신 및 재가입조건, 전환실비','t','doc-silson','s2')])]),
+      N('국민건강보험과 상품의구조','t','doc-silson','s4')]),
+    N('2. 3대진단비','S','doc-diag',null,[
+      N('a. 암','s','doc-diag','s0',[
+        N('일반암','t','doc-diag','s0'),
+        N('소액암','t','doc-diag','s0',[N('갑기경제','t','doc-diag','s0'),N('전자유방','t','doc-diag','s0')]),
+        N('고액암','t','doc-diag','s1',[N('3대/5대/10대/16대 고액암 등','t','doc-diag','s1')]),
+        N('재진단암과 이차암','t','doc-diag','s2'),
+        N('암수술과 암입원일당','t','doc-diag','s3')]),
+      N('b. 뇌질환','s','doc-diag','s4',[
+        N('뇌혈관질환','t','doc-diag','s4'),
+        N('뇌졸중','t','doc-diag','s4',[N('뇌출혈','t','doc-diag','s4'),N('뇌경색','t','doc-diag','s4')])]),
+      N('c. 심장질환','s','doc-diag','s5',[N('허혈성심장질환','t','doc-diag','s5')])]),
+    N('3. 후유장해','S','doc-disab',null,[N('질병후유장해','t','doc-disab','s0'),N('상해후유장해','t','doc-disab','s1'),N('장해분류표','t','doc-disab','s2')]),
+    N('4. 배상책임','S','doc-liab',null,[N('자녀/일상/가족배상책임보험','t','doc-liab','s0'),N('배상책임 사례','t','doc-liab','s1')]),
+    N('5. 운전자보험','S','doc-driver',null,[N('교통사고처리지원비 형사합의금','t','doc-driver','s0'),N('벌금','t','doc-driver','s1'),N('변호사비용','t','doc-driver','s2'),N('교통사고부상치료비','t','doc-driver','s3')]),
+    N('6. 수술비','S','doc-surg',null,[N('수술의 정의와 사례','t','doc-surg','s0'),N('생손보 종수술비 및 특정수술','t','doc-surg','s1')]),
+    N('7. 기타','S','doc-hosp-etc',null,[N('입원일당','t','doc-hosp-etc','s0'),N('기타','t','doc-hosp-etc','s1')])]),
+  N('화재보험','M','cat-fire',null,[N('화재보험의 의의','t','doc-fire-basic','s0'),N('화재보험의 구조 및 종류','t','doc-fire-basic','s1'),N('화재보험의 담보구성','t','doc-fire-cover','s0')]),
+  N('자동차보험','M','cat-auto',null,[N('대인보상','t','doc-auto-cover','s0'),N('대물보상','t','doc-auto-cover','s1'),N('자상/자손 차이','t','doc-auto-cover','s2'),N('자동차보험 약관','t','doc-auto-terms','s0'),N('기타 추가가능한 특약 및 자동차보험 가입 팁','t','doc-auto-terms','s1')]),
+  N('약관','M','cat-terms',null,[N('상법과 보험업법','t','doc-law','s0'),N('보통약관','t','doc-general',null,[N('부담보/실효/부활/납입면제/철회/통지의무','t','doc-general','s0')]),N('특별약관','t','doc-special','s0'),N('분쟁사례 및 판례','t','doc-dispute','s0')])
+ ],
+ right:[
+  N('사망보험','M','cat-death',null,[
+    N('1. 종신보험','S','doc-whole',null,[N('CI보험','t','doc-whole','s1',[N('중대한의 의미와 컨셉','t','doc-whole','s2')]),N('GI보험','t','doc-whole','s1')]),
+    N('2. 정기보험','S','doc-termlife'),
+    N('3. 재해사망과 상해사망','S','doc-accdeath',null,[N('재해사망과 상해사망의 차이점','t','doc-accdeath','s0')]),
+    N('4. 질병사망과 일반사망','S','doc-disdeath'),
+    N('5. 알아야할 내용','S','cat-death',null,[N('상해의 입증요소 3가지: 외래성/우연성/급격성','t','doc-accdeath','s1'),N('사망의 원인 및 확률, 보장범위','t','doc-disdeath','s1'),N('종신보험의 구조','t','doc-whole','s0'),N('보상 조건, 납입면제/추가납입/중도인출/납입정지, 연금전환','t','doc-whole','s3')])]),
+  N('저축(연금)보험','M','cat-annuity',null,[
+    N('공시이율형 상품','S','doc-fixed',null,[
+      N('a. 연금저축','s','doc-fixed','s0',[N('세액공제의개념 및 장단점','t','doc-fixed','s0'),N('연금펀드','t','doc-fixed','s1')]),
+      N('b. 연금보험','s','doc-fixed','s2'),N('c. 저축보험','s','doc-fixed','s3'),N('d. 종신보험을 이용한 저축플랜','s','doc-fixed','s4')]),
+    N('변액투자형 상품','S','doc-variable',null,[N('a. 변액유니버셜저축보험 VUL','s','doc-variable','s0'),N('b. 변액연금보험 VA','s','doc-variable','s1')]),
+    N('알아야 할 내용','S','doc-taxfree',null,[N('비과세 및 비과세 조건','t','doc-taxfree','s0'),N('변액상품에서의 펀드 개념, 관리방법','t','doc-variable','s2'),N('상품적인 기능에 대한 차이점','t','doc-taxfree','s1')])]),
+  N('판매채널','M','cat-channel',null,[
+    N('원수사','t','doc-ga','s0'),
+    N('대리점(GA)','t','doc-ga','s1',[N('연합','t','doc-ga','s1'),N('독립','t','doc-ga','s1')]),
+    N('영업규정/수수료/근무환경','t','doc-ga','s2'),
+    N('영업방식','t','cat-channel',null,[
+      N('대면영업','t','doc-offline',null,[
+        N('지인/DB/브리핑/개척/법인영업 등','t','doc-offline','s0'),
+        N('재무설계','t','doc-offline','s1',[N('수입/지출/상품관리','t','doc-offline','s1'),N('금융기초','t','doc-offline','s2',[N('은행/증권사/보험사','t','doc-offline','s2')]),N('정보받기-재무목표 설정-상품 제안','t','doc-offline','s3')])]),
+      N('비대면영업','t','doc-online',null,[
+        N('카페/댓글/광고/SNS/블로그','t','doc-online','s0'),
+        N('블로그 관련','t','doc-online','s1',[
+          N('포스팅 기본 양식','t','doc-online','s1',[N('상위노출 조건-로직','t','doc-online','s1'),N('블로그 컨셉 잡기','t','doc-online','s2')]),
+          N('로열키워드란?','t','doc-online','s2'),
+          N('포스팅방식','t','doc-online','s3',[N('검색량/포스팅수/제한키워드/노출기준확인 등','t','doc-online','s3'),N('고객의 입장에서 찾기','t','doc-online','s3')])]),
+        N('유튜브 및 네이버TV','t','doc-online','s4'),
+        N('SNS를 활용한 마케팅','t','doc-online','s4')])])])
+ ],
+ far:[
+  N('일반 고지의무','M','doc-disclosure','d2',[
+    N('3개월 이내 진단/치료/의심소견\n(단 의심소견의 경우 소견서나\n진단서 등을 발급)','t','doc-disclosure','d2'),
+    N('1년 이내 진료진찰을 통한 추가(재)검사','t','doc-disclosure','d2'),
+    N('5년 이내 입원/수술/7일이상통원/\n30일이상 약처방','t','doc-disclosure','d2'),
+    N('5년 이내 10대질병(암/고혈압/협심증/뇌졸중/\n심근경색/당뇨/간경화증 등)의 진단/치료,\n단 실비가입시 항문질환도 고지','t','doc-disclosure','d2'),
+    N('직업/위험취미/키-몸무게','t','doc-disclosure','d2')]),
+  N('간편고지의무','M','doc-disclosure','d3',[
+    N('간편보험은 상품마다 고지의무 상이\n(325/31/32/5 등)','t','doc-disclosure','d3'),
+    N('3개월 이내 입원/수술/추가검사에\n대한 의사소견','t','doc-disclosure','d3'),
+    N('2년 이내 입원/수술','t','doc-disclosure','d3'),
+    N('5년이내 암으로 진단/치료','t','doc-disclosure','d3')]),
+  N('그외','M','cat-basics',null,[
+    N('보험금청구 및 절차','t','doc-claim','s0',[N('고지의무 위반시 프로세스','t','doc-disclosure','d4')]),
+    N('고지의무 적용방법 및 보상','t','doc-claim','s1'),
+    N('수익자 지정 및 케이스','t','doc-benef','s0'),
+    N('환급형과 순수보장형, 적립보험료','t','doc-refund','s0'),
+    N('갱신형과 비갱신형','t','doc-renew','s0'),
+    N('80세만기와 100세만기','t','doc-maturity','s0'),
+    N('납입기간과 무해지상품','t','doc-nonrefund','s0'),
+    N('주요 질병의 원인/통계/치료법/인수기준','t','doc-disease','s0'),
+    N('화법과 컨셉','t','sales','step-2'),
+    N('세일즈프로세스','t','sales','step-1')])
+ ],
+ chain:'가망고객 발굴 - AP(접근, 자기소개 및 분위기 전환) - 니즈환기(필요성 느끼기) - FF(팩트 파인딩, 정보요청) - PT(견적 제안 및 절차 안내) - CL(클로징, 마무리멘트, 결정시키기) - 계약 - 관리(꾸준한 연락 및 보상관리) - 소개받기(소개받은 고객은 가망고객으로)',
+ boxes:[
+  ['가망고객',['지인영업','DB영업','온라인영업','개척영업','브리핑영업','가망고객관리방식']],
+  ['AP',['신뢰도 높이기','- 자기소개','- 명함전달','- 상담과정안내','분위기전환','- 아이스브레이킹','- 칭찬하기','- 공통관심사찾기']],
+  ['니즈환기',['감성자극하기','객관적인 안내하기','보상사례 안내']],
+  ['FF',['인적정보 및 병력정보','기가입보험증권','가족관계 및 가족력','기존 누락된 보상건 찾기','그외 특이사항']],
+  ['PT',['카테고리를 이용한 제안','상품비교를 통한','제안분석프로그램의 활용']],
+  ['클로징',['AP~PT까지의 반복','마무리 화법']],
+  ['관리',['3대기본지키기','고객정보 정리','관리일정 정리']],
+  ['소개',['캘린더를 이용한','정보전달/리뷰','보상관리']]]
+};
+
+var AT={W:1876,ROW:22,FS:{M:20,S:15,s:14,t:13.5},H:{M:46,S:30,s:26},PAD:{M:36,S:20,s:18},GAP:{pill:24,txt:13},CX:795,CR:62,LX:765,RX:825,FX:1404,TOP:64};
+var _mctx=null,_mcache={};
+function tw(s,fs,bold){
+  var key=fs+'|'+(bold?'b':'n')+'|'+s;if(_mcache[key])return _mcache[key];
+  if(!_mctx){var cv=document.createElement('canvas');_mctx=cv.getContext('2d');}
+  _mctx.font=(bold?'700 ':'400 ')+fs+'px '+(bold?'"Gothic A1",':'')+'"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif';
+  var w=_mctx.measureText(s).width;_mcache[key]=w;return w;
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function aLayout(n){
+  var k=n.k,fs=AT.FS[k];n.fs=fs;n.lines=n.t.split('\n');
+  var maxw=0;n.lines.forEach(function(l){maxw=Math.max(maxw,tw(l,fs,k!=='t'));});
+  n.w=k==='t'?maxw+4:maxw+AT.PAD[k];
+  n.h=k==='t'?AT.ROW*n.lines.length:AT.H[k];
+  var total=0,gap=0;
+  n.ch.forEach(function(c){aLayout(c);total+=c.sh;if(c.k!=='t')gap=8;});
+  if(n.ch.length>1)total+=gap*(n.ch.length-1);
+  n.sh=Math.max(total,n.h+(k==='t'?0:10));
+  var y=-total/2;n.ch.forEach(function(c){c.ry=y+c.sh/2;y+=c.sh+gap;});
+}
+function aPlace(n,x,cy,dir){
+  n.cy=cy;n.dir=dir;
+  if(dir==='R'){n.x0=x;n.x1=x+n.w;}else{n.x1=x;n.x0=x-n.w;}
+  n.base=n.k==='t'?cy+(n.lines.length-1)*AT.ROW/2+AT.ROW/2-1:cy;
+  var gap=n.k==='t'?AT.GAP.txt:AT.GAP.pill;
+  n.ch.forEach(function(c){aPlace(c,dir==='R'?n.x1+gap:n.x0-gap,cy+c.ry,dir);});
+}
+function elbow(x1,y1,sx,y2,x2){
+  if(Math.abs(y1-y2)<.5)return 'M'+x1+' '+y1+'H'+x2;
+  var r=Math.min(7,Math.abs(y2-y1)/2),dx=sx>x1?1:-1,dy=y2>y1?1:-1,dx2=x2>sx?1:-1;
+  return 'M'+x1+' '+y1+'H'+(sx-dx*r)+'Q'+sx+' '+y1+' '+sx+' '+(y1+dy*r)+'V'+(y2-dy*r)+'Q'+sx+' '+y2+' '+(sx+dx2*r)+' '+y2+'H'+x2;
+}
+var _aid=0,ANODES={};
+function aRender(n,parent){
+  var id='a'+(_aid++),dir=n.dir,s='';ANODES[id]=n;
+  s+='<g class="nd k'+n.k+'" data-id="'+id+'" tabindex="0" role="link" aria-label="'+esc(n.t.replace(/\n/g,' '))+'">';
+  if(parent){
+    var gap=parent.k==='t'?AT.GAP.txt:AT.GAP.pill;
+    var sx=dir==='R'?parent.x1+gap*.55:parent.x0-gap*.55;
+    var py=parent.k==='t'?parent.base+3:parent.cy, px=dir==='R'?parent.x1:parent.x0;
+    var cy=n.k==='t'?n.base+3:n.cy, ex=n.k==='t'?(dir==='R'?n.x1:n.x0):(dir==='R'?n.x0:n.x1);
+    s+='<path class="ln" d="'+elbow(px,py,sx,cy,ex)+'"/>';
+  }
+  s+='<g class="lbl">';
+  if(n.k==='t'){
+    var ax=dir==='R'?n.x0+2:n.x1-2,anchor=dir==='R'?'start':'end';
+    s+='<text class="tx" x="'+ax+'" y="'+(n.cy-(n.lines.length-1)*AT.ROW/2+n.fs*.36)+'" text-anchor="'+anchor+'" font-size="'+n.fs+'">';
+    n.lines.forEach(function(l,i){s+='<tspan x="'+ax+'"'+(i?' dy="'+AT.ROW+'"':'')+'>'+esc(l)+'</tspan>';});
+    s+='</text>';
+  } else {
+    s+='<rect class="sh" x="'+n.x0+'" y="'+(n.cy-n.h/2)+'" width="'+n.w+'" height="'+n.h+'" rx="'+(n.k==='M'?12:8)+'"/>';
+    s+='<text class="tx" x="'+(n.x0+n.w/2)+'" y="'+(n.cy+n.fs*.36)+'" text-anchor="middle" font-size="'+n.fs+'">'+esc(n.t)+'</text>';
+  }
+  s+='</g>';
+  n.ch.forEach(function(c){s+=aRender(c,n);});
+  return s+'</g>';
+}
+function aStack(list,dir,x,top){
+  var y=top,cys=[];
+  list.forEach(function(n){aLayout(n);var cy=y+n.sh/2;aPlace(n,x,cy,dir);cys.push(cy);y+=n.sh+34;});
+  return {bottom:y-34,cys:cys};
+}
+function buildAtlas(){
+  _aid=0;ANODES={};
+  var L=aStack(MAP.left,'L',AT.LX,AT.TOP),R=aStack(MAP.right,'R',AT.RX,AT.TOP),F=aStack(MAP.far,'R',AT.FX,AT.TOP+120);
+  var mid=(AT.TOP+Math.max(L.bottom,R.bottom))/2,allc=L.cys.concat(R.cys).sort(function(a,b){return a-b;}),need=AT.CR*2+70;
+  var best=null;for(var i=0;i<=allc.length;i++){var g0=i?allc[i-1]:AT.TOP-200,g1=i<allc.length?allc[i]:Math.max(L.bottom,R.bottom)+200,sz=g1-g0,c=(g0+g1)/2;if(sz<need)continue;var d=Math.abs(c-mid);if(!best||d<best.d)best={c:c,d:d};}
+  var cy=Math.round(best?best.c:mid);
+  var salesY=Math.max(L.bottom,R.bottom,F.bottom)+54;
+  var H=salesY+70+22+172+40;
+  var s='<svg class="atlas-svg" viewBox="0 0 '+AT.W+' '+H+'" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="보험 카테고리 지식지도">';
+  s+='<defs><linearGradient id="gM" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A66F0"/><stop offset="1" stop-color="#6E52EA"/></linearGradient>'+
+     '<radialGradient id="gC" cx="38%" cy="32%" r="70%"><stop offset="0" stop-color="#7FAEFF"/><stop offset=".45" stop-color="#3A66F0"/><stop offset="1" stop-color="#2A2F9E"/></radialGradient>'+
+     '<radialGradient id="gHalo"><stop offset="0" stop-color="#4FA9E8" stop-opacity=".22"/><stop offset="1" stop-color="#4FA9E8" stop-opacity="0"/></radialGradient>'+
+     '<linearGradient id="gChain" x1="0" x2="1"><stop offset="0" stop-color="#0A7396"/><stop offset=".5" stop-color="#2F5BEA"/><stop offset="1" stop-color="#6B4EE6"/></linearGradient></defs>';
+  /* trunk */
+  var ymin=Math.min.apply(null,allc.concat([cy])),ymax=Math.max.apply(null,allc.concat([cy]));
+  s+='<g class="trunk"><line x1="'+AT.CX+'" y1="'+ymin+'" x2="'+AT.CX+'" y2="'+ymax+'"/>';
+  L.cys.forEach(function(y){s+='<line x1="'+AT.LX+'" y1="'+y+'" x2="'+AT.CX+'" y2="'+y+'"/>';});
+  R.cys.forEach(function(y){s+='<line x1="'+AT.CX+'" y1="'+y+'" x2="'+AT.RX+'" y2="'+y+'"/>';});
+  s+='</g>';
+  /* title block */
+  s+='<g class="atlas-title"><text class="eyeb" x="60" y="'+(AT.TOP-22)+'">Prime Asset Premium · Insurance Wiki</text></g>';
+  /* branches */
+  var g='';MAP.left.forEach(function(n){g+=aRender(n,null);});MAP.right.forEach(function(n){g+=aRender(n,null);});MAP.far.forEach(function(n){g+=aRender(n,null);});
+  s+='<g class="nodes">'+g+'</g>';
+  /* center */
+  s+='<g class="center" tabindex="0" role="button" aria-label="검색 열기"><circle cx="'+AT.CX+'" cy="'+cy+'" r="'+(AT.CR*2.1)+'" fill="url(#gHalo)"/><circle class="ring" cx="'+AT.CX+'" cy="'+cy+'" r="'+(AT.CR+8)+'"/><circle class="ring r2" cx="'+AT.CX+'" cy="'+cy+'" r="'+(AT.CR+8)+'"/>'+
+     '<circle class="core" cx="'+AT.CX+'" cy="'+cy+'" r="'+AT.CR+'" fill="url(#gC)"/>'+
+     '<text class="ct" x="'+AT.CX+'" y="'+(cy-6)+'" text-anchor="middle">보험</text><text class="ct" x="'+AT.CX+'" y="'+(cy+22)+'" text-anchor="middle">카테고리</text><text class="cs" x="'+AT.CX+'" y="'+(cy-30)+'" text-anchor="middle">PRIME · v3.0</text></g>';
+  /* sales process */
+  var bx=60,by=salesY,bw=236,bh=66;
+  s+='<g class="sales"><g class="nd kB" data-id="sp" tabindex="0" role="link" aria-label="세일즈 프로세스"><g class="lbl"><rect class="sh" x="'+bx+'" y="'+by+'" width="'+bw+'" height="'+bh+'" rx="12"/><text class="tx" x="'+(bx+bw/2)+'" y="'+(by+28)+'" text-anchor="middle" font-size="17">세일즈 프로세스</text><text class="tx2" x="'+(bx+bw/2)+'" y="'+(by+50)+'" text-anchor="middle" font-size="12.5">Sales Process</text></g></g>';
+  s+='<line class="chain-ln" x1="'+(bx+bw)+'" y1="'+(by+bh/2)+'" x2="'+(bx+bw+18)+'" y2="'+(by+bh/2)+'"/>';
+  s+='<text class="chain" x="'+(bx+bw+26)+'" y="'+(by+bh/2+5)+'" font-size="13.5">'+esc(MAP.chain)+'</text>';
+  ANODES.sp={t:'세일즈 프로세스',to:'sales',tg:'step-1'};
+  var x=bx+bw+26,w=170,gapx=8,y0=by+bh+20;
+  MAP.boxes.forEach(function(b,i){
+    var id='sb'+i;ANODES[id]={t:b[0],to:'sales',tg:'step-'+(i+1)};
+    s+='<g class="nd kX" data-id="'+id+'" tabindex="0" role="link" aria-label="'+(i+1)+'단계 '+esc(b[0])+'"><g class="lbl"><rect class="sh" x="'+x+'" y="'+y0+'" width="'+w+'" height="172" rx="12"/>';
+    s+='<text class="bn" x="'+(x+14)+'" y="'+(y0+22)+'" font-size="11">STEP '+(i+1)+' · '+esc(b[0]).toUpperCase()+'</text>';
+    b[1].forEach(function(l,j){s+='<text class="bl'+(l.charAt(0)==='-'?' sub':'')+'" x="'+(x+14+(l.charAt(0)==='-'?10:0))+'" y="'+(y0+44+j*16.5)+'" font-size="12.5">'+esc(l.replace(/^- /,''))+'</text>';});
+    s+='</g></g>';x+=w+gapx;
+  });
+  s+='</g></svg>';
+  return s;
+}
+/* mobile tree list */
+function aList(n){
+  var label=esc(n.t.replace(/\n/g,' '));
+  if(!n.ch.length)return '<a class="al-item" href="#'+n.to+'"'+(n.tg?' data-target="'+n.tg+'"':'')+'>'+label+'</a>';
+  return '<details class="al-'+n.k+'"><summary><span>'+label+'</span><a class="al-go" href="#'+n.to+'"'+(n.tg?' data-target="'+n.tg+'"':'')+' aria-label="'+label+' 열기">열기 →</a></summary><div class="al-kids">'+n.ch.map(aList).join('')+'</div></details>';
+}
+function buildAtlasList(){
+  var all=MAP.left.concat(MAP.right,MAP.far);
+  var sales='<details class="al-M"><summary><span>세일즈 프로세스</span><a class="al-go" href="#sales">열기 →</a></summary><div class="al-kids">'+MAP.boxes.map(function(b,i){return '<a class="al-item" href="#sales" data-target="step-'+(i+1)+'">'+(i+1)+'. '+esc(b[0])+'</a>';}).join('')+'</div></details>';
+  return '<div class="atlas-list">'+all.map(aList).join('')+sales+'</div>';
+}
+function wireAtlas(){
+  var box=document.getElementById('atlas');if(!box)return;
+  var svg=box.querySelector('svg');if(!svg)return;
+  var hov=null;
+  function setHov(el){if(hov===el)return;if(hov)hov.classList.remove('hv');hov=el;if(hov){hov.classList.add('hv');svg.classList.add('hov');}else svg.classList.remove('hov');}
+  svg.addEventListener('mouseover',function(e){var nd=e.target.closest('.nd');setHov(nd);});
+  svg.addEventListener('mouseleave',function(){setHov(null);});
+  svg.addEventListener('focusin',function(e){var nd=e.target.closest('.nd');setHov(nd);});
+  svg.addEventListener('focusout',function(){setHov(null);});
+  var dragging=false,moved=false,sx=0,sy=0,vb=[0,0,AT.W,0],base=[0,0,AT.W,0],scale=1;
+  var vbs=svg.getAttribute('viewBox').split(' ').map(Number);vb=vbs.slice();base=vbs.slice();
+  function apply(){svg.setAttribute('viewBox',vb.join(' '));box.classList.toggle('zoomed',scale>1.01);}
+  function zoomTo(ns,cx,cy){ns=Math.max(1,Math.min(3,ns));var w=base[2]/ns,h=base[3]/ns;
+    var fx=cx==null?.5:(cx-vb[0])/vb[2],fy=cy==null?.5:(cy-vb[1])/vb[3];
+    var nx=(cx==null?vb[0]+vb[2]/2:cx)-fx*w,ny=(cy==null?vb[1]+vb[3]/2:cy)-fy*h;
+    scale=ns;vb=[clamp(nx,0,base[2]-w),clamp(ny,0,base[3]-h),w,h];apply();}
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function pt(e){var r=svg.getBoundingClientRect();return [vb[0]+(e.clientX-r.left)/r.width*vb[2],vb[1]+(e.clientY-r.top)/r.height*vb[3]];}
+  box.querySelector('[data-z="in"]').addEventListener('click',function(){zoomTo(scale*1.35);});
+  box.querySelector('[data-z="out"]').addEventListener('click',function(){zoomTo(scale/1.35);});
+  box.querySelector('[data-z="reset"]').addEventListener('click',function(){zoomTo(1);});
+  svg.addEventListener('wheel',function(e){if(!(e.ctrlKey||e.metaKey))return;e.preventDefault();var p=pt(e);zoomTo(scale*(e.deltaY<0?1.15:1/1.15),p[0],p[1]);},{passive:false});
+  svg.addEventListener('pointerdown',function(e){if(scale<=1.01||e.button!==0)return;dragging=true;moved=false;sx=e.clientX;sy=e.clientY;svg.setPointerCapture(e.pointerId);});
+  svg.addEventListener('pointermove',function(e){if(!dragging)return;var r=svg.getBoundingClientRect(),dx=(e.clientX-sx)/r.width*vb[2],dy=(e.clientY-sy)/r.height*vb[3];if(Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>4)moved=true;vb[0]=clamp(vb[0]-dx,0,base[2]-vb[2]);vb[1]=clamp(vb[1]-dy,0,base[3]-vb[3]);sx=e.clientX;sy=e.clientY;apply();});
+  svg.addEventListener('pointerup',function(){dragging=false;});
+  svg.addEventListener('click',function(e){
+    if(moved){moved=false;return;}
+    if(e.target.closest('.center')){openPal();return;}
+    var nd=e.target.closest('.nd');if(!nd)return;var n=ANODES[nd.getAttribute('data-id')];if(n&&n.to)go(n.to,n.tg);
+  });
+  svg.addEventListener('keydown',function(e){if(e.key!=='Enter'&&e.key!==' ')return;var nd=e.target.closest('.nd');if(nd){e.preventDefault();var n=ANODES[nd.getAttribute('data-id')];if(n&&n.to)go(n.to,n.tg);}else if(e.target.closest('.center')){e.preventDefault();openPal();}});
+}
+
+/* ================= VIEWS ================= */
+function viewHome(){
+  var tiles=[
+    ['고객관리 표준 매뉴얼','세팅부터 소개 창출까지, 원문 전체와 체크리스트'],
+    ['실전 화법 모음','세일즈 8단계별 화법 스크립트 전문'],
+    ['상품 비교 · 시책','보험사별 비교표와 이달의 시책 (통합페이지 연동)'],
+    ['프리미엄 자료검색기','보유 자료 수천 건을 한 번에 검색']
+  ].map(function(t){return '<div class="tile glass rv'+(member?' open':'')+'"'+(member?'':' data-login')+'><h3>'+t[0]+'</h3><p>'+t[1]+'</p><span class="st">'+LOCK+(member?'열람 가능':'로그인 후 열람')+'</span></div>';}).join('');
+  return ''+
+  '<section class="wrap atlas" id="atlas">'+
+    '<div class="atlas-head"><div><span class="pill"><i></i>Knowledge Atlas · 보험카테고리 v3.0</span><h1>보험 카테고리 <span class="gt">지식지도</span></h1><p>항목에 마우스를 올리면 가지가 빛나고, 누르면 해당 문서로 이동합니다. 가운데 구체를 누르면 검색이 열리고, Ctrl+휠로 확대할 수 있습니다.</p></div>'+
+    '<div class="atlas-tools"><button class="ztool" type="button" data-z="out" aria-label="축소">−</button><button class="ztool" type="button" data-z="reset">맞춤</button><button class="ztool" type="button" data-z="in" aria-label="확대">+</button></div></div>'+
+    '<div class="atlas-frame">'+buildAtlas()+'</div>'+buildAtlasList()+
+  '</section>'+
+  '<section class="sec" style="padding-top:60px"><div class="wrap"><div class="sec-head rv"><div><span class="pill"><i></i>Members Lounge</span><h2>설계사 라운지</h2></div><p>통합페이지에 로그인한 소속 설계사에게만 열리는 영역입니다.</p></div><div class="tiles">'+tiles+'</div></div></section>'+
+  '<section class="wrap"><div class="cta rv"><div class="cta-in"><div><span class="pill"><i></i>Join Premium</span><h2>배운 만큼 성과로 이어지는 조직</h2><p>교육 자료, 영업 시스템, 자동화 도구를 함께 씁니다. 프라임에셋 프리미엄사업부 합류를 고민 중이라면 편하게 문의하세요.</p></div>'+
+  '<div class="contact"><small>합류 · 상담 문의</small><div class="row"><span class="num" id="phone">010-8714-9262</span><button class="btn ghost sm" type="button" id="copyPhone">번호 복사</button></div><small>프라임에셋 188본부 · 김상현 본부장</small><a class="btn cyan" href="https://primeasset.info" target="_blank" rel="noopener">프리미엄사업부 홈페이지 →</a></div></div></div></section>';
+}
+function viewCat(c){
+  var cards=c.children.map(function(ch){
+    return '<a class="dcard glass rv" href="'+docHref(ch)+'"><h3>'+ch.name+'</h3><ul>'+(ch.items||[]).slice(0,4).map(function(it){return '<li>'+it+'</li>';}).join('')+'</ul><div class="foot">'+(ch.sample?'<span class="tag cy">샘플 문서</span>':'<span class="tag">작성 예정</span>')+'<span class="tag">'+(ch.items?ch.items.length:0)+' 섹션</span></div></a>';
+  }).join('');
+  return '<section class="pagehead"><div class="wrap"><div class="crumbs"><a href="#home">지식지도</a><span>/</span><span>'+GROUP_KO[c.g]+'</span></div><h1>'+c.name+'</h1><p>'+c.desc+'</p><div class="meta"><span class="tag cy">'+c.children.length+' 문서</span><span class="tag">원본 · 보험카테고리 v3.0</span></div></div></section>'+
+    '<div class="wrap"><div class="docs">'+cards+'</div></div>';
+}
+
+function sideTree(curId){
+  return CATS.map(function(c){
+    var open=c.children.some(function(x){return x.id===curId;});
+    return '<details'+(open?' open':'')+'><summary>'+c.name+'</summary>'+c.children.map(function(ch){return '<a href="'+docHref(ch)+'"'+(ch.id===curId?' class="on"':'')+'>'+ch.name+'</a>';}).join('')+'</details>';
+  }).join('');
+}
+function docShell(f,toc,body){
+  return '<section class="pagehead"><div class="wrap"><div class="crumbs"><a href="#home">지식지도</a><span>/</span><a href="#cat-'+f.cat.id+'">'+f.cat.name+'</a></div><h1>'+f.doc.name+'</h1>'+body.head+'</div></section>'+
+  '<div class="wrap doc"><aside class="side glass" aria-label="문서 목록">'+sideTree(f.doc.id)+'</aside><article class="article">'+body.main+'</article>'+
+  '<nav class="toc" aria-label="이 문서의 목차"><span class="pill"><i></i>On this page</span>'+toc.map(function(t){return '<a href="#'+t[0]+'" data-jump="'+t[0]+'">'+t[1]+'</a>';}).join('')+'</nav></div>';
+}
+function viewStub(f){
+  var items=f.doc.items||[];
+  var toc=items.map(function(it,i){return ['s'+i,it.split(':')[0]];});
+  var main=items.map(function(it,i){return '<h2 id="s'+i+'">'+it+'</h2><div class="stub"><span>초안 작성 예정 · 기초자료에서 변환</span><span class="tag">TODO</span></div>';}).join('');
+  main+='<h2 id="sm">현장 자료</h2>'+lockBlock('설계사 전용 자료','상품 비교표와 실전 화법은 로그인 후 열람합니다','<p>이 분야의 비교표, 화법, 사례 자료가 이 자리에 연결됩니다.</p>');
+  toc.push(['sm','현장 자료']);
+  var head='<p>보험카테고리 v3.0의 하위 항목을 그대로 목차로 옮긴 문서 틀입니다.</p><div class="meta"><span class="tag">작성 예정</span><span class="tag">'+items.length+' 섹션</span><span class="tag">원본 · 보험카테고리 v3.0</span></div>';
+  return docShell(f,toc,{head:head,main:main});
+}
+
+var LB={
+  general:[['질병 확정진단 · 의심소견 · 치료 · 입원 · 수술 · 투약, 상시 복용 약',1],['진찰 · 검사 후 추가검사(재검사)를 받은 사실',2],['입원 · 수술 · 계속 7일 이상 치료 · 계속 30일 이상 투약',4],['10대 질병의 진단 · 치료 · 입원 · 수술 · 투약',4]],
+  simple:[['입원 · 수술 · 추가검사가 필요하다는 의사 소견',1],['질병 · 상해로 인한 입원 · 수술',3],['암 진단 · 입원 · 수술',4]]
+};
+function lbRows(kind){return LB[kind].map(function(r){return '<div class="lb-label">'+r[0]+'</div><div class="lb-track"><div class="lb-bar" data-w="'+(r[1]*25)+'" style="width:0%"></div></div>';}).join('');}
+function viewDisclosure(f){
+  var toc=[['d1','계약 전 알릴 의무란'],['d2','일반심사 고지 항목'],['d3','간편고지 3·2·5'],['d4','위반 시 처리'],['d5','실무 체크포인트'],['d6','설계사 전용']];
+  var head='<p>청약서 질문에 사실대로 답하는 것. 인수 심사와 보험금 지급이 모두 여기서 갈립니다.</p><div class="meta"><span class="tag cy">샘플 문서</span><span class="tag">기준일 2026.10</span><span class="tag">근거 · 상법 · 표준약관</span><span class="tag warn">프로토타입 · 법령 문구 최종 검수 필요</span></div>';
+  var main=''+
+  '<h2 id="d1">계약 전 알릴 의무란</h2>'+
+  '<p>'+T('goji','고지의무')+'는 계약자와 피보험자가 청약할 때 보험회사가 묻는 중요한 사항을 사실대로 알려야 하는 의무입니다. <span class="law">상법 제651조</span> 보험회사가 서면으로 질문한 사항은 중요한 사항으로 추정합니다. <span class="law">상법 제651조의2</span></p>'+
+  '<p>고지는 반드시 <strong>청약서(전자청약 포함)의 질문표</strong>에 합니다. 설계사에게 말로 전한 것만으로는 보험회사에 알린 것으로 인정되지 않는 것이 원칙입니다.</p>'+
+  '<h2 id="d2">일반심사 고지 항목</h2>'+
+  '<p>표준 청약서 질문은 기간별로 묻는 내용이 다릅니다. 아래 막대는 <strong>오늘부터 거슬러 올라가 확인하는 기간</strong>입니다.</p>'+
+  '<div class="lb glass" id="lb"><div class="lb-tabs" role="tablist"><button type="button" role="tab" class="on" data-lb="general" aria-selected="true">일반심사</button><button type="button" role="tab" data-lb="simple" aria-selected="false">간편고지 3·2·5</button></div>'+
+  '<div class="lb-grid"><div class="lb-axis-label" style="font-size:11px;color:var(--mute);font-family:var(--fm)">질문 항목</div><div class="lb-axis"><span>3개월</span><span>1년</span><span>2년</span><span>5년</span></div><div style="display:contents" id="lbRows">'+lbRows('general')+'</div></div>'+
+  '<p class="lb-cap">구간은 질문표의 기간 단위로 나눈 것이며 시간 비례가 아닙니다. 상품마다 질문 구성이 다를 수 있으니 청약서 질문표가 기준입니다.</p></div>'+
+  '<div class="tablewrap"><table><thead><tr><th>기간</th><th>묻는 내용</th></tr></thead><tbody>'+
+   '<tr><td>최근 3개월</td><td>의사의 진찰·검사로 질병 확정진단, 질병 의심소견, 치료, 입원, 수술, 투약을 받은 사실. 혈압강하제 등 상시 복용 약물</td></tr>'+
+   '<tr><td>최근 1년</td><td>진찰·검사를 받고 추가검사(재검사)를 받은 사실</td></tr>'+
+   '<tr><td>최근 5년</td><td>입원, 수술, 계속하여 7일 이상 치료, 계속하여 30일 이상 투약</td></tr>'+
+   '<tr><td>최근 5년</td><td>10대 질병(암, 백혈병, 고혈압, 협심증, 심근경색, 심장판막증, 간경화증, 뇌졸중, 당뇨병, 에이즈·HIV 보균)으로 진단·치료·입원·수술·투약</td></tr>'+
+   '<tr><td>현재</td><td>직업, 운전 여부, 위험한 취미, 키·몸무게 등</td></tr>'+
+  '</tbody></table></div>'+
+  '<div class="note"><b>현장 메모</b> 의심소견은 소견서나 진단서로 확인되는 경우가 많습니다. '+T('silson','실손')+' 가입 시에는 상품에 따라 추가 질문이 붙을 수 있으니 질문표를 끝까지 확인하세요.</div>'+
+  '<h2 id="d3">간편고지 3·2·5</h2>'+
+  '<p>'+T('simple')+'는 질문을 줄여 유병자도 가입할 수 있게 한 심사 방식입니다. 가장 흔한 형태가 3·2·5 구조입니다.</p>'+
+  '<ul><li><strong>3개월</strong> 이내 입원·수술·추가검사가 필요하다는 의사 소견</li><li><strong>2년</strong> 이내 질병·상해로 인한 입원·수술</li><li><strong>5년</strong> 이내 암 진단·입원·수술</li></ul>'+
+  '<p>상품에 따라 기간 구성이 다른 변형(예: 3·5·5)이 있습니다. 같은 고객이라도 일반심사로 가입 가능한지 먼저 확인하면 보험료를 줄일 수 있습니다.</p>'+
+  '<h2 id="d4">위반 시 처리</h2>'+
+  '<p>고지의무를 위반하면 보험회사는 계약을 해지할 수 있습니다. 다만 아래의 경우에는 해지할 수 없습니다.</p>'+
+  '<div class="twocol"><div class="box glass"><h4>해지할 수 없는 경우 (표준약관 요지)</h4><ul><li>보험회사가 위반 사실을 안 날부터 1개월이 지났을 때</li><li>'+T('bojang')+'부터 보험금 지급사유 없이 2년(진단계약은 1년)이 지났을 때</li><li>계약을 체결한 날부터 3년이 지났을 때</li><li>보험회사가 계약 당시 그 사실을 알았거나 과실로 알지 못했을 때</li><li>설계사 등이 고지할 기회를 주지 않았거나 사실대로 고지하는 것을 방해한 때</li></ul></div>'+
+  '<div class="box glass"><h4>보험금은 어떻게 되나</h4><ul><li>계약이 해지되면 원칙적으로 보험금을 지급하지 않습니다</li><li>단, 알리지 않은 사실이 보험금 지급사유 발생에 영향을 주지 않았다고 증명되면 보험금은 지급됩니다 <span class="law">상법 제655조</span></li><li>이 경우에도 계약 자체는 해지될 수 있습니다</li></ul></div></div>'+
+  '<h2 id="d5">실무 체크포인트</h2>'+
+  '<ol><li>질문표의 질문에는 빠짐없이 사실대로 답하게 안내합니다.</li><li>"이 정도는 말 안 해도 된다"는 안내는 하지 않습니다. 고지 방해로 판단되면 설계사 책임 문제로 이어집니다.</li><li>병원 기록이 애매하면 진료기록을 먼저 확인하고 청약합니다.</li><li>일반심사 → 간편고지 순서로 인수 가능성을 확인합니다.</li></ol>'+
+  '<h2 id="d6">설계사 전용</h2>'+
+  lockBlock('고지 판단 체크리스트 · 인수 사례','통합페이지 로그인 후 열람','<h3 style="margin-top:0">고지 판단 체크리스트</h3><ul><li>질병별 고지 대상 여부 판단표 (고혈압, 갑상선, 용종 등)</li><li>보험사별 간편고지 질문 구성 비교</li><li>부담보 · 할증 인수 사례 모음</li></ul><p style="color:var(--mute);font-size:13px">운영 버전에서는 이 영역이 통합페이지의 자료와 연결됩니다.</p>');
+  return docShell(f,toc,{head:head,main:main});
+}
+
+function viewSales(){
+  var rail=STEPS.map(function(s){return '<a href="#sales" data-target="step-'+s.n+'" data-rail="'+s.n+'"><span class="d">'+s.n+'</span>'+s.short+'</a>';}).join('');
+  var steps=STEPS.map(function(s){
+    var checks=s.checks.length?'<div class="checks">'+s.checks.map(function(c){return '<div class="check"><b>'+c[0]+'</b><span>'+c[1]+'</span></div>';}).join('')+'</div>':'';
+    var diag=s.diag?'<div class="diag" id="diag"><div class="diag-q">고객이 마지막에 망설인다면, 어떤 말에 가깝나요?</div><div class="diag-opts">'+
+      '<button type="button" data-d="2">"설계사는 좋은데, 아직 믿고 맡겨도 될지 모르겠다"</button>'+
+      '<button type="button" data-d="3">"좋은 건 알겠는데, 지금 당장 꼭 해야 하나?"</button>'+
+      '<button type="button" data-d="4">"내 상황(예산, 병력)이랑 조금 안 맞는 것 같다"</button>'+
+      '<button type="button" data-d="5">"다른 데가 더 좋지 않을까? 더 비교해보고 싶다"</button>'+
+      '</div><div class="diag-out" id="diagOut">하나를 고르면 다시 점검할 단계를 알려드립니다.</div></div>':'';
+    var scripts='';
+    if(s.scripts.length){
+      var inner='<div class="scripts">'+s.scripts.map(function(x){return '<div class="script"><b>'+x[0]+'</b><p>'+x[1]+'</p></div>';}).join('')+'</div>';
+      scripts=lockBlock('실전 화법 '+s.scripts.length+'개','설계사 전용 · 통합페이지 로그인 후 열람',inner);
+    }
+    return '<section class="step glass rv" id="step-'+s.n+'" data-step="'+s.n+'"><span class="bgnum" aria-hidden="true">'+(s.n<10?'0':'')+s.n+'</span>'+
+      '<span class="step-k">Step '+s.n+' · '+s.k+'</span><h2>'+s.name+'</h2><div class="quote"><span class="gt">'+s.quote+'</span></div><p class="intro">'+s.intro+'</p>'+checks+diag+scripts+
+      '<div class="tip"><b>TIP</b>'+s.tip+'</div></section>';
+  }).join('');
+  return '<section class="pagehead"><div class="wrap"><div class="crumbs"><a href="#home">지식지도</a><span>/</span><span>영업</span></div><h1>세일즈 프로세스 <span class="gt">8단계</span></h1><p>영업은 운이 아니라 공식입니다. 각 단계를 알고 실천하면 계약 확률이 오르고, 고객 만족이 높아지며, 소개가 따라옵니다.</p>'+
+    '<div class="meta"><span class="tag cy">'+T('AP')+' · 니즈 · '+T('FF')+' · '+T('PT')+' · '+T('CL')+'</span><span class="tag">원본 · 세일즈프로세스</span></div></div></section>'+
+    '<div class="wrap sales"><nav class="rail" aria-label="단계 이동">'+rail+'</nav><div class="steps">'+steps+'</div></div>';
+}
+
+function viewGlossary(){
+  return '<section class="pagehead"><div class="wrap"><div class="crumbs"><a href="#home">지식지도</a><span>/</span><span>용어사전</span></div><h1>용어사전</h1><p>문서 본문의 밑줄 용어에 마우스를 올리면 같은 뜻풀이가 바로 뜹니다.</p></div></section>'+
+  '<div class="wrap"><div class="gtools"><input id="gq" type="search" placeholder="용어 찾기 (초성 가능)" aria-label="용어 찾기"></div><div class="glist" id="glist">'+
+  GLOSS.map(function(g){return '<div class="gitem glass rv" id="g-'+g[0]+'" data-s="'+g[1]+' '+g[2]+'"><h3>'+g[1]+'</h3><p>'+g[2]+'</p></div>';}).join('')+'</div></div>';
+}
+
+function viewLounge(){
+  var items=[['고객관리 표준 매뉴얼','세팅부터 소개 창출까지. 원문 PDF와 단계별 체크리스트.','PDF 원문 연결 예정'],['실전 화법 모음','세일즈 8단계 화법 전문과 상황별 응대.','세일즈 페이지와 연동'],['상품 비교 · 시책','보험사별 비교표와 이달의 시책.','통합페이지 연동 예정'],['프리미엄 자료검색기','보유 자료 수천 건 통합 검색.','기존 검색기 연결 예정']];
+  var tiles=items.map(function(t){return '<div class="tile glass rv'+(member?' open':'')+'"'+(member?'':' data-login')+'><h3>'+t[0]+'</h3><p>'+t[1]+'</p><span class="st">'+LOCK+(member?t[2]:'로그인 후 열람')+'</span></div>';}).join('');
+  var top=member?'<div class="note"><b>설계사 화면 미리보기 중</b> 운영 버전에서는 통합페이지 로그인 정보로 자동 인증됩니다. <button class="btn ghost sm" type="button" data-logout style="margin-left:8px">미리보기 끄기</button></div>'
+    :'<div class="note"><b>소속 설계사 전용</b> 통합페이지 로그인 후 이용할 수 있습니다. <button class="btn sm" type="button" data-login style="margin-left:8px">로그인</button></div>';
+  return '<section class="pagehead"><div class="wrap"><div class="crumbs"><a href="#home">지식지도</a><span>/</span><span>설계사 라운지</span></div><h1>설계사 라운지</h1><p>공개 위키 위에 얹히는 소속 설계사 전용 영역입니다.</p></div></section>'+
+    '<div class="wrap" style="padding-block:28px 80px">'+top+'<div class="tiles" style="margin-top:20px">'+tiles+'</div></div>';
+}
+
+/* ================= ROUTER ================= */
+function go(r,target){
+  if(location.hash==='#'+r&&target){var el=document.getElementById(target);if(el){el.scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'start'});return;}}
+  pendingTarget=target||null;
+  if(location.hash==='#'+r){render();}else{location.hash=r;}
+}
+function render(){
+  observers.forEach(function(o){o.disconnect();});observers=[];
+  hideTip();
+  var h=(location.hash||'#home').slice(1)||'home', navKey='home';
+  if(h==='home'){app.innerHTML=viewHome();wireHome();}
+  else if(h==='sales'){app.innerHTML=viewSales();wireSales();navKey='sales';}
+  else if(h==='glossary'){app.innerHTML=viewGlossary();wireGloss();navKey='glossary';}
+  else if(h==='lounge'){app.innerHTML=viewLounge();navKey='lounge';}
+  else if(h.indexOf('cat-')===0&&catById(h.slice(4))){app.innerHTML=viewCat(catById(h.slice(4)));navKey='cat';}
+  else if(h.indexOf('doc-')===0&&findChild(h.slice(4))){
+    var f=findChild(h.slice(4));
+    app.innerHTML=f.doc.id==='disclosure'?viewDisclosure(f):viewStub(f);
+    navKey=f.doc.id==='disclosure'?'doc':'cat';
+    wireLB();
+  } else {app.innerHTML=viewHome();wireHome();}
+  document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-r')===navKey);});
+  updateAuthBtn();wireReveal();
+  if(pendingTarget){var t=document.getElementById(pendingTarget);pendingTarget=null;if(t){setTimeout(function(){t.scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'start'});},40);return;}}
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',render);
+
+/* ================= WIRING ================= */
+function wireReveal(){
+  var els=[].slice.call(document.querySelectorAll('.rv'));
+  if(!('IntersectionObserver' in window)||REDUCED){els.forEach(function(e){e.classList.add('in');});return;}
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){var r=e.getBoundingClientRect();if(r.top<window.innerHeight*.95)e.classList.add('in');else io.observe(e);});
+  observers.push(io);
+}
+var fontsDone=false;
+function wireHome(){
+  wireAtlas();
+  if(!fontsDone&&document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){if(fontsDone)return;fontsDone=true;_mcache={};if(!location.hash||location.hash==='#home'){var y=window.scrollY;render();window.scrollTo(0,y);}});}
+}
+function wireSales(){
+  var steps=[].slice.call(document.querySelectorAll('.step'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(ents){ents.forEach(function(e){if(e.isIntersecting){markStep(+e.target.getAttribute('data-step'));}});},{rootMargin:'-45% 0px -50% 0px'});
+    steps.forEach(function(s){io.observe(s);});observers.push(io);
+  }
+  markStep(1);
+  var out=document.getElementById('diagOut');
+  document.querySelectorAll('[data-d]').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('[data-d]').forEach(function(x){x.classList.toggle('on',x===b);});
+      var n=+b.getAttribute('data-d'),s=STEPS[n-1];
+      out.innerHTML='<b style="color:var(--fg)">'+n+'단계 '+s.name+'</b>에 구멍이 있다는 신호입니다. '+s.checks.map(function(c){return c[0];}).join(', ')+'을(를) 다시 채우세요. <a href="#sales" data-target="step-'+n+'">'+n+'단계로 이동 →</a>';
+    });
+  });
+}
+function markStep(n){
+  document.querySelectorAll('.step').forEach(function(s){s.classList.toggle('on',+s.getAttribute('data-step')===n);});
+  document.querySelectorAll('[data-rail]').forEach(function(a){var k=+a.getAttribute('data-rail');a.classList.toggle('on',k===n);a.classList.toggle('done',k<n);});
+}
+function wireLB(){
+  var box=document.getElementById('lb');if(!box)return;
+  function grow(){box.querySelectorAll('.lb-bar').forEach(function(b){b.style.width=b.getAttribute('data-w')+'%';});}
+  requestAnimationFrame(function(){requestAnimationFrame(grow);});
+  box.querySelectorAll('[data-lb]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      box.querySelectorAll('[data-lb]').forEach(function(x){var on=x===btn;x.classList.toggle('on',on);x.setAttribute('aria-selected',on?'true':'false');});
+      document.getElementById('lbRows').innerHTML=lbRows(btn.getAttribute('data-lb'));
+      requestAnimationFrame(function(){requestAnimationFrame(grow);});
+    });
+  });
+}
+function wireGloss(){
+  var q=document.getElementById('gq');
+  q.addEventListener('input',function(){var v=q.value.trim();document.querySelectorAll('.gitem').forEach(function(it){it.hidden=v&&!match(it.getAttribute('data-s'),v);});});
+}
+
+/* ================= SEARCH ================= */
+var CHO=['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+function cho(s){var o='';for(var i=0;i<s.length;i++){var c=s.charCodeAt(i);o+=(c>=0xAC00&&c<=0xD7A3)?CHO[Math.floor((c-0xAC00)/588)]:s[i];}return o;}
+function isCho(q){return /^[ㄱ-ㅎ\s]+$/.test(q);}
+function norm(s){return s.toLowerCase().replace(/\s+/g,'');}
+function match(text,q){q=norm(q);if(!q)return true;return isCho(q)?norm(cho(text)).indexOf(q)>-1:norm(text).indexOf(q)>-1;}
+var INDEX=[];
+CATS.forEach(function(c){
+  INDEX.push({t:c.name,s:'분야',r:c.route?'sales':'cat-'+c.id});
+  c.children.forEach(function(ch){
+    if(ch.step){INDEX.push({t:ch.name.replace(/^\d+\. /,ch.step+'단계 '),s:'세일즈 프로세스',r:'sales',tg:'step-'+ch.step});return;}
+    INDEX.push({t:ch.name,s:c.name,r:'doc-'+ch.id});
+    (ch.items||[]).forEach(function(it,i){INDEX.push({t:it,s:c.name+' › '+ch.name,r:'doc-'+ch.id,tg:ch.sample?null:'s'+i});});
+  });
+});
+STEPS.forEach(function(s){s.checks.forEach(function(c){INDEX.push({t:c[0],s:s.n+'단계 '+s.name,r:'sales',tg:'step-'+s.n});});});
+GLOSS.forEach(function(g){INDEX.push({t:g[1],s:'용어',r:'glossary',tg:'g-'+g[0]});});
+INDEX.push({t:'설계사 라운지',s:'전용',r:'lounge'});
+
+var palScrim=document.getElementById('palScrim'),palInput=document.getElementById('palInput'),palRes=document.getElementById('palRes'),sel=0,results=[];
+function hl(t,q){if(!q||isCho(q))return t;var i=t.toLowerCase().indexOf(q.toLowerCase());return i<0?t:t.slice(0,i)+'<mark>'+t.slice(i,i+q.length)+'</mark>'+t.slice(i+q.length);}
+function runSearch(){
+  var q=palInput.value.trim();
+  results=q?INDEX.filter(function(x){return match(x.t+' '+x.s,q);}).slice(0,14):INDEX.filter(function(x){return x.s==='분야';});
+  sel=0;
+  palRes.innerHTML=results.length?results.map(function(x,i){return '<a href="#'+x.r+'" data-pi="'+i+'"'+(i===0?' class="sel"':'')+'>'+hl(x.t,q)+'<span>'+x.s+'</span></a>';}).join(''):'<div class="pal-empty">"'+q.replace(/</g,'&lt;')+'"에 맞는 문서가 없습니다. 다른 단어나 초성으로 찾아보세요.</div>';
+}
+function openPal(){palScrim.hidden=false;palInput.value='';runSearch();setTimeout(function(){palInput.focus();},10);}
+function closePal(){palScrim.hidden=true;}
+function pick(i){var x=results[i];if(!x)return;closePal();go(x.r,x.tg);if(x.tg&&x.tg.indexOf('g-')===0){setTimeout(function(){var el=document.getElementById(x.tg);if(el){el.classList.add('hl');setTimeout(function(){el.classList.remove('hl');},2200);}},120);}}
+palInput.addEventListener('input',runSearch);
+palInput.addEventListener('keydown',function(e){
+  var links=palRes.querySelectorAll('a');
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();if(!links.length)return;sel=(sel+(e.key==='ArrowDown'?1:-1)+links.length)%links.length;links.forEach(function(a,i){a.classList.toggle('sel',i===sel);});links[sel].scrollIntoView({block:'nearest'});}
+  else if(e.key==='Enter'){e.preventDefault();pick(sel);}
+});
+palRes.addEventListener('click',function(e){var a=e.target.closest('a[data-pi]');if(!a)return;e.preventDefault();pick(+a.getAttribute('data-pi'));});
+palScrim.addEventListener('click',function(e){if(e.target===palScrim)closePal();});
+document.getElementById('openPal').addEventListener('click',openPal);
+
+/* ================= AUTH (demo) ================= */
+var loginScrim=document.getElementById('loginScrim');
+function updateAuthBtn(){var b=document.getElementById('authBtn');b.innerHTML=member?'<span class="member-dot"></span>설계사 모드':'설계사 로그인';b.classList.toggle('ghost',member);}
+function setMember(v){member=v;try{sessionStorage.setItem('pw-member',v?'1':'0');}catch(e){}var y=window.scrollY;render();window.scrollTo(0,y);toast(v?'설계사 화면을 미리 보고 있습니다':'공개 화면으로 돌아왔습니다');}
+document.getElementById('authBtn').addEventListener('click',function(){if(member)go('lounge');else loginScrim.hidden=false;});
+document.getElementById('demoLogin').addEventListener('click',function(){loginScrim.hidden=true;setMember(true);});
+loginScrim.addEventListener('click',function(e){if(e.target===loginScrim||e.target.hasAttribute('data-close'))loginScrim.hidden=true;});
+
+/* ================= TOOLTIP ================= */
+var tipPop=document.getElementById('tipPop'),tipFor=null;
+function showTip(el){var g=GMAP[el.getAttribute('data-t')];if(!g)return;tipFor=el;tipPop.innerHTML='<b>'+g[1]+'</b>'+g[2];tipPop.hidden=false;
+  var r=el.getBoundingClientRect(),w=tipPop.offsetWidth,h=tipPop.offsetHeight;
+  var x=Math.min(Math.max(12,r.left+r.width/2-w/2),window.innerWidth-w-12),y=r.top-h-10;if(y<76)y=r.bottom+10;
+  tipPop.style.left=x+'px';tipPop.style.top=y+'px';}
+function hideTip(){tipPop.hidden=true;tipFor=null;}
+document.addEventListener('mouseover',function(e){var t=e.target.closest&&e.target.closest('.term');if(t)showTip(t);});
+document.addEventListener('mouseout',function(e){var t=e.target.closest&&e.target.closest('.term');if(t)hideTip();});
+document.addEventListener('focusin',function(e){if(e.target.classList&&e.target.classList.contains('term'))showTip(e.target);});
+document.addEventListener('focusout',function(e){if(e.target.classList&&e.target.classList.contains('term'))hideTip();});
+window.addEventListener('scroll',function(){if(tipFor)hideTip();},{passive:true});
+
+/* ================= GLOBAL CLICKS / KEYS ================= */
+document.addEventListener('click',function(e){
+  var t=e.target.closest('.term');if(t){showTip(t);return;}
+  if(tipFor)hideTip();
+  var a=e.target.closest('a[data-target]');if(a){e.preventDefault();go(a.getAttribute('href').slice(1),a.getAttribute('data-target'));return;}
+  var j=e.target.closest('a[data-jump]');if(j){e.preventDefault();var el=document.getElementById(j.getAttribute('data-jump'));if(el)el.scrollIntoView({behavior:REDUCED?'auto':'smooth'});return;}
+  if(e.target.closest('[data-login]')){loginScrim.hidden=false;return;}
+  if(e.target.closest('[data-logout]')){setMember(false);return;}
+  if(e.target.closest('[data-pal]')){openPal();return;}
+  if(e.target.closest('#copyPhone')){var num=document.getElementById('phone').textContent;
+    try{navigator.clipboard.writeText(num).then(function(){toast('번호를 복사했습니다');},function(){selectPhone();});}catch(err){selectPhone();}}
+});
+function selectPhone(){var r=document.createRange();r.selectNodeContents(document.getElementById('phone'));var s=window.getSelection();s.removeAllRanges();s.addRange(r);toast('번호를 선택했습니다. Ctrl+C로 복사하세요');}
+document.addEventListener('keydown',function(e){
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();palScrim.hidden?openPal():closePal();}
+  else if(e.key==='Escape'){closePal();loginScrim.hidden=true;hideTip();}
+  else if(e.key==='/'&&palScrim.hidden&&!/input|textarea/i.test(document.activeElement.tagName)){e.preventDefault();openPal();}
+});
+var toastT;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true;},2200);}
+
+render();
+})();
+</script>
+
 </body>
 </html>
