@@ -261,7 +261,6 @@ function render(){
   if(h==='home'){app.innerHTML=viewHome();wireHome();}
   else if(h==='sales'){app.innerHTML=viewSales();wireSales();navKey='sales';}
   else if(h==='glossary'){app.innerHTML=viewGlossary();wireGloss();navKey='glossary';}
-  else if(h==='lounge'){app.innerHTML=viewLounge();navKey='lounge';}
   else if(false){
   } else {app.innerHTML=viewHome();wireHome();}
   document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-r')===navKey);});
@@ -345,7 +344,7 @@ document.getElementById('openPal').addEventListener('click',openPal);
 var loginScrim=document.getElementById('loginScrim');
 function updateAuthBtn(){var b=document.getElementById('authBtn');b.innerHTML=member?'<span class="member-dot"></span>설계사 모드':'설계사 로그인';b.classList.toggle('ghost',member);}
 function setMember(){member=false;toast('전용 자료는 승인된 설계사 로그인 후 열립니다.');}
-document.getElementById('authBtn').addEventListener('click',function(){if(member)go('lounge');else openDialog(loginScrim);});
+document.getElementById('authBtn').addEventListener('click',function(){openDialog(loginScrim);});
 document.getElementById('demoLogin').addEventListener('click',function(){location.href='https://test.primeasset.info/members/wiki/';});
 loginScrim.addEventListener('click',function(e){if(e.target===loginScrim||e.target.hasAttribute('data-close'))closeDialog(loginScrim);});
 
